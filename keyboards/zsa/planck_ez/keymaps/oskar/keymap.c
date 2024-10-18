@@ -40,10 +40,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * Base Layer: Modified RSTHD
      */
     [_BASE] = LAYOUT_planck_1x2uC(
-      SE_J,    SE_C,    SE_Y,    SE_F,    SE_P,   _______,  _______,   SE_X,    SE_W,    SE_O,    SE_U,    SE_DOT,
-      SE_R,    SE_S,    SE_T,    SE_H,    SE_K,   _______,  _______,   SE_M,    SE_N,    SE_A,    SE_I,    REPEAT,
-      SE_COMM, SE_V,    SE_G,    SE_D,    SE_B,   _______,  _______,   SE_SLSH, SE_L,    SE_LPRN, SE_RPRN, SE_UNDS,
-      _______, _______, _______, SHRT,    MT_SPC, _______,             SE_E,    SPEC,    _______, _______, _______
+      SE_COMM, SE_W,    SE_F,    SE_P,    SE_B,   _______,  _______,   SE_J,    SE_L,    SE_U,    SE_Y,    SE_DOT,
+      SE_A,    SE_R,    SE_S,    SE_T,    SE_G,   _______,  _______,   SE_M,    SE_N,    SE_E,    SE_I,    SE_O, //REPEAT rem.
+      SE_SLSH, SE_X,    SE_C,    SE_D,    SE_V,   _______,  _______,   SE_K,    SE_H,    SE_LPRN, SE_RPRN, SE_UNDS,
+      _______, _______, _______, SHRT,    MT_SPC, _______,             R_THMB, SPEC,    _______, _______, _______
     ),
     [_SWE]  = LAYOUT_planck_1x2uC(
       _______, _______, _______, _______, _______, _______,  _______,  _______, _______, _______, _______, _______,
@@ -52,9 +52,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, _______, _______, _______, _______, _______,            _______, _______, _______, _______, _______
     ),
     [_NUM]  = LAYOUT_planck_1x2uC(
-      SE_J,    SE_PLUS, SE_ASTR, SE_EXLM, SE_P,    _______,  _______,  SE_X,    _______, AT_U,    REPEAT,  _______,
-      SE_6,    SE_4,    SE_0,    SE_2,    SE_K,    _______,  _______,  _______, SE_3,    SE_1,    SE_5,    SE_7,
-      SE_COMM, _______, NUM_G,   SE_8,    _______, _______,  _______,  SE_SLSH, SE_9,    SE_LPRN, SE_RPRN, SE_UNDS,
+      SE_COMM, SE_PLUS, SE_ASTR, SE_EXLM, _______, _______,  _______,  SE_J,    _______, AT_U,    _______, _______, //REPEAT rem.
+      SE_6,    SE_4,    SE_0,    SE_2,    _______, _______,  _______,  _______, SE_3,    SE_1,    SE_5,    SE_7,
+      SE_SLSH, SE_X,    NUM_G,   SE_8,    _______, _______,  _______,  SE_K,    SE_9,    SE_LPRN, SE_RPRN, SE_UNDS,
       _______, _______, _______, _______, _______, _______,            CANCEL,  _______, _______, _______, _______
     ),
     [_NAV]  = LAYOUT_planck_1x2uC(
@@ -258,13 +258,13 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
         case dlr:
             return COMBO_TERM;
         // Vertical combos, very relaxed
-        case small_left_arrow:
+/*      case small_left_arrow:
         case lt_eq:
         case large_right_arrow:
         case small_right_arrow:
-        case pipe_to:
+        case pipe_to: */
         case sp:
-        case gt_eq:
+//        case gt_eq:
             return COMBO_TERM + 55;
         // Regular combos, slightly relaxed
         default:
@@ -294,7 +294,7 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
         case comb_at:
         case comb_0:
         case comb_e_acut:
-        case rev_rep:
+//        case rev_rep:
         case arng:
         case adia:
         case odia:
@@ -305,7 +305,7 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
         case ctrl_combo_r:
         case shift_combo_l:
         case shift_combo_r:
-        case close_win:
+//        case close_win:
         case escape_sym:
         case tab_mod:
         case coln_sym:
