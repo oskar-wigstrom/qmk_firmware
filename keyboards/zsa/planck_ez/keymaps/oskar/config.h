@@ -25,10 +25,10 @@
 // Configure the global tapping term (default: 200ms)
 #define TAPPING_TERM_PER_KEY
 #ifdef TAPPING_TERM_PER_KEY
-#    define TAPPING_TERM 170
+#    define TAPPING_TERM 200
 #else
 // Only for thumbs
-#    define TAPPING_TERM 220
+#    define TAPPING_TERM 250
 #endif
 
 // Prevent normal rollover on alphas from accidentally triggering mods.
