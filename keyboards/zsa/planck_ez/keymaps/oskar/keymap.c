@@ -252,7 +252,7 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
         case ctrl_combo_r:
         case quot:
         case ent:
-        case vsp:
+        case vim_tmux_sp:
         case gui_combo_l:
         case gui_combo_r:
         case dlr:
@@ -263,7 +263,7 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
         case large_right_arrow:
         case small_right_arrow:
         case pipe_to: */
-        case sp:
+        case vim_tmux_vs:
 //        case gt_eq:
             return COMBO_TERM + 55;
         // Regular combos, slightly relaxed
@@ -305,9 +305,11 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
         case ctrl_combo_r:
         case shift_combo_l:
         case shift_combo_r:
-//        case close_win:
+        case close_win:
         case escape_sym:
         case tab_mod:
+        case vim_tmux_vs:
+        case vim_tmux_sp:
         case coln_sym:
         case dquo:
         case lalt:
@@ -324,7 +326,6 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo) {
 }
 
 // Tapping terms
-
 #ifdef TAPPING_TERM_PER_KEY
 
 #    define THUMB_TERM 20
@@ -407,6 +408,8 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
         case OS_CTRL:
         case OS_ALT:
         case OS_GUI:
+        case VIM_TMUX_SP:
+        case VIM_TMUX_VS:
         case TAB_MOD:
             return true;
         default:
@@ -498,6 +501,8 @@ bool tap_hold(uint16_t keycode) {
         case C(SE_G):
         case C(SE_D):
         case C(SE_B):
+        case VIM_TMUX_SP:
+        case VIM_TMUX_VS:
             return true;
         default:
             return false;
@@ -535,6 +540,14 @@ void tap_hold_send_tap(uint16_t keycode) {
             /* tap_code16(SE_COLN); */
             /* tap_code(SE_Q); */
             /* tap_code(KC_ENT); */
+            return;
+        case VIM_TMUX_SP:
+            tap_code16(C(SE_W));
+            tap_code(SE_S);
+            return;
+        case VIM_TMUX_VS:
+            tap_code16(C(SE_W));
+            tap_code(SE_V);
             return;
         default:
             tap16_repeatable(keycode);
@@ -611,6 +624,14 @@ void tap_hold_send_hold(uint16_t keycode) {
             } else {
                 tap16_repeatable(S(keycode));
             }
+            return;
+        case VIM_TMUX_SP:
+            tap_code16(C(SE_B));
+            send_string("\"");
+            return;
+        case VIM_TMUX_VS:
+            tap_code16(C(SE_B));
+            send_string("%");
             return;
         default:
             tap16_repeatable(S(keycode));
@@ -805,18 +826,6 @@ bool _process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code(KC_ENT);
             }
             return false;
-        case VIM_SP:
-            if (record->event.pressed) {
-                tap_code16(C(SE_W));
-                tap_code(SE_S);
-            }
-            return false;
-        case VIM_VS:
-            if (record->event.pressed) {
-                tap_code16(C(SE_W));
-                tap_code(SE_V);
-            }
-            return false;
         case NUM_G:
             if (record->event.pressed) {
                 tap_code16(S(SE_G));
@@ -913,3 +922,4 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 void matrix_scan_user(void) {
     tap_hold_matrix_scan();
 }
+

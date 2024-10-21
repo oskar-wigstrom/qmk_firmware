@@ -30,9 +30,12 @@ enum custom_keycodes {
 
     // Vim
     SAVE_VIM,
-    VIM_VS,
-    VIM_SP,
     CLOSE_WIN,
+
+    // Vim  + tmux
+    VIM_TMUX_VS,
+    VIM_TMUX_SP,
+
 
     // Multiple chars
     QU,
