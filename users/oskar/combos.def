@@ -2,13 +2,13 @@
 COMB(q_comb,            SE_Q,           SE_A, SE_W)
 COMB(qu_comb,           QU,             SE_W, SE_F)
 COMB(z_comb,            SE_Z,           SE_F, SE_P)
-    // COMB(ctrl_w,            C(SE_W),        SE_W, SE_F, SE_P)    // ******
+COMB(ctrl_w,            C(SE_W),        SE_W, SE_F, SE_P)
 COMB(clear,             CLEAR,          SE_P, SE_B)
 // Right top row
     // SUBS(el_str_int,        "#{}"SS_TAP(X_LEFT),  SE_J, SE_L)
 COMB(eql,               SE_EQL,         SE_L, SE_U)
 COMB(backsp,            KC_BSPC,        SE_U, SE_Y)
-    // COMB(ctrl_w2,            C(SE_W),        SE_L, SE_U, SE_I)   // *******
+COMB(ctrl_w2,            C(SE_W),        SE_L, SE_U, SE_I)
     // COMB(rev_rep,           REV_REP,        SE_Y, SE_DOT)
 
 // Left home row
@@ -37,7 +37,7 @@ COMB(shift_combo_l,     KC_LSFT,        SE_D, SE_V)
 COMB(shift_combo_r,     KC_RSFT,        SE_K, SE_H)
 COMB(gui_combo_r,       OS_GUI,         SE_H, SE_LPRN)
 COMB(dlr,               SE_DLR,         SE_LPRN, SE_RPRN)
-    // COMB(leader,            LEADER,         SE_L, SE_RPRN)       // *******
+// COMB(leader,            LEADER,         SE_L, SE_RPRN)       // *******
 COMB(swe,               TG_SWE,         SE_L, SE_LPRN, SE_RPRN)
 
 // Mixed home row + other
