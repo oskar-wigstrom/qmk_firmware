@@ -5,7 +5,7 @@
     },
     "features": {
         "bootmagic": false,
-        "mousekey": true,
+        "mousekey": false,
         "extrakey": true,
         "nkro": true,
         "rgb_matrix": true

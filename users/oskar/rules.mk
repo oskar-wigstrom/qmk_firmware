@@ -1,5 +1,6 @@
 COMBO_ENABLE = yes
 RGBLIGHT_ENABLE = no        # Keyboard RGB underglow
+RGB_MATRIX_ENABLE = yes      # Per key RGB
 
 # Easy definition of combos
 VPATH +=  keyboards/gboards/
@@ -14,7 +15,6 @@ MOUSEKEY_ENABLE = no        # Them mouse keys yo
 KEY_OVERRIDE_ENABLE = no
 LEADER_ENABLE = no
 TAP_DANCE_ENABLE = no
-# RGB_MATRIX_ENABLE = no      # Per key RGB, Ferris Bling requires this
 
 # Saves a bunch of memory
 EXTRAFLAGS += -flto
@@ -32,3 +32,4 @@ SRC += tap_hold.c
 SRC += repeat.c
 SRC += roll.c
 SRC += leader.c
+SRC += utils.c
