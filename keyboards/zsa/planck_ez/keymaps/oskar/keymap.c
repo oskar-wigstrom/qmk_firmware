@@ -46,10 +46,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, _______, _______, _______, _______, _______,            CANCEL,  _______, _______, _______, _______
     ),
     [_NAV]  = LAYOUT_planck_1x2uC(
-      G(SE_J), KC_LEFT, KC_UP,   KC_RGHT, KC_HOME,  _______,  _______,  xxxxxxx, G(SE_W), G(SE_E), G(SE_R), xxxxxxx,
-      KC_PGUP, SC_TAB,  DN_CTRL, C_TAB,   G(SE_K),  _______,  _______,  xxxxxxx, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,
-      KC_ENT,  xxxxxxx, xxxxxxx, KC_PGDN, KC_END,   _______,  _______,  xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,
-      _______, _______, _______, _______, _______,  _______,            WNAV,    _______, _______, _______, _______
+      _______, KC_LEFT, KC_UP,   KC_RGHT, KC_HOME,  _______,  _______,  xxxxxxx, G(SE_W), G(SE_E), G(SE_R), xxxxxxx,
+      G(SE_H), G(SE_J), DN_CTRL, G(SE_K), G(SE_L),  _______,  _______,  xxxxxxx, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,
+      xxxxxxx, xxxxxxx, KC_PGUP, KC_PGDN, KC_END,   _______,  _______,  xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,
+      _______, _______, _______, _______, TO_BASE,  _______,            TG_WNAV,    _______, _______, _______, _______
     ),
     [_WIN]  = LAYOUT_planck_1x2uC(
       _______, _______, _______, _______, _______,  _______,  _______,  _______, _______, _______, _______, _______,
@@ -85,10 +85,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     */
     [_WNAV] = LAYOUT_planck_1x2uC(
-      G(SE_J), G(SE_C), xxxxxxx, xxxxxxx, xxxxxxx,   _______,  _______, xxxxxxx, G(SE_W), G(SE_E), G(SE_R), xxxxxxx,
-      G(SE_6), G(SE_4), G(SE_0), G(SE_2), G(SE_K),   _______,  _______, xxxxxxx, G(SE_3), G(SE_1), G(SE_5), G(SE_7),
-      xxxxxxx, xxxxxxx, xxxxxxx, G(SE_8), xxxxxxx,   _______,  _______, xxxxxxx, G(SE_9), G(SE_H), G(SE_L), xxxxxxx,
-      _______, _______, _______, _______, G(KC_SPC), _______,           _______, _______, _______, _______, _______
+      xxxxxxx, xxxxxxx, xxxxxxx, G(SE_P), xxxxxxx,   _______,  _______, xxxxxxx, G(SE_W), G(SE_E), G(SE_R), xxxxxxx,
+      G(SE_6), G(SE_4), G(SE_0), G(SE_2), xxxxxxx,   _______,  _______, xxxxxxx, G(SE_3), G(SE_1), G(SE_5), G(SE_7),
+      xxxxxxx, xxxxxxx, xxxxxxx, G(SE_8), xxxxxxx,   _______,  _______, xxxxxxx, G(SE_9), xxxxxxx, xxxxxxx, xxxxxxx,
+      _______, _______, _______, _______, TG_WNAV,   _______,           TO_BASE, _______, _______, _______, _______
     ),
     [_FUN]  = LAYOUT_planck_1x2uC(
       xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,   _______,  _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,
@@ -187,4 +187,32 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
             return true;
     }
 }
+
+// Runs whenever there is a layer state change.
+layer_state_t layer_state_set_user(layer_state_t state) {
+
+    planck_ez_left_led_off();
+    planck_ez_right_led_off();
+
+    uint8_t layer = get_highest_layer(state);
+    switch (layer) {
+        case _BASE:     
+            break;
+        case _NAV:
+            planck_ez_right_led_on();
+            planck_ez_right_led_level(127);
+            break;
+        case _WNAV:
+            planck_ez_left_led_on();
+            planck_ez_left_led_level(127);
+            planck_ez_right_led_on();
+            planck_ez_right_led_level(127);
+            break;
+	default:
+            break;
+    }
+
+    return state;
+};
+
 

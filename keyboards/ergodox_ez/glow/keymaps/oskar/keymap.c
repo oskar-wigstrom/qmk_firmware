@@ -40,8 +40,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
 				       			_______,	 _______,
-        				 SHRT,  MT_SPC, _______,         _______,  R_THMB,    SPEC
-    ),
+        				         MT_SPC,  SHRT, _______,         _______,    SPEC,  R_THMB
+      ),
 [_SWE] = LAYOUT_ergodox_pretty(
   _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
   _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
@@ -60,17 +60,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
 				       			_______,	 _______,
-        			      _______, _______, _______,         _______, CANCEL,  _______
+        			      _______, _______, _______,          _______, _______, CANCEL
     ),
 [_NAV] = LAYOUT_ergodox_pretty(
   _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
-  _______, G(SE_J), KC_LEFT, KC_UP,   KC_RGHT, KC_HOME, _______,         _______, xxxxxxx, G(SE_W), G(SE_E), G(SE_R), xxxxxxx, _______,
-  _______, KC_PGUP, SC_TAB,  DN_CTRL, C_TAB,   G(SE_K),                           xxxxxxx, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-  _______, KC_ENT,  xxxxxxx, xxxxxxx, KC_PGDN, KC_END,  _______,         _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,
+  _______, _______, KC_LEFT, KC_UP,   KC_RGHT, KC_HOME, _______,         _______, xxxxxxx, G(SE_W), G(SE_E), G(SE_R), xxxxxxx, _______,
+  _______, G(SE_H), G(SE_J), DN_CTRL, G(SE_K), G(SE_L),                            xxxxxxx, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+  _______, xxxxxxx, xxxxxxx, KC_PGUP, KC_PGDN, KC_END,  _______,         _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,
   _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
 				       			_______,	 _______,
-        			      _______, _______, _______,         _______, WNAV,    _______
+        			      TG_NAV, _______, _______,         _______,    _______, TG_WNAV
     ),
 [_WIN] = LAYOUT_ergodox_pretty(
   _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
@@ -90,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
 				       			_______,	 _______,
-        			      _______, _______, _______,         _______, CANCEL,  _______
+        			      _______, _______, _______,         _______,  _______, CANCEL
     ),
 [_MODS] = LAYOUT_ergodox_pretty(
   _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
@@ -110,17 +110,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
 				       			_______,	 _______,
-        			      _______, _______, _______,         _______, _______, FUN
+        			      _______, _______, _______,         _______, FUN, _______
     ),
 [_WNAV] = LAYOUT_ergodox_pretty(
   _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
-  _______, G(SE_J), G(SE_C), xxxxxxx, xxxxxxx, xxxxxxx, _______,         _______, xxxxxxx, G(SE_W), G(SE_E), G(SE_R), xxxxxxx, _______,
-  _______, G(SE_6), G(SE_4), G(SE_0), G(SE_2), G(SE_K),                           xxxxxxx, G(SE_3), G(SE_1), G(SE_5), G(SE_7), _______,
-  _______, xxxxxxx, xxxxxxx, xxxxxxx, G(SE_8), xxxxxxx, _______,         _______, xxxxxxx, G(SE_9), G(SE_H), G(SE_L), xxxxxxx, _______,
+  _______, xxxxxxx, xxxxxxx, xxxxxxx, G(SE_P), xxxxxxx, _______,         _______, xxxxxxx, G(SE_W), G(SE_E), G(SE_R), xxxxxxx, _______,
+  _______, G(SE_6), G(SE_4), G(SE_0), G(SE_2), xxxxxxx,                           xxxxxxx, G(SE_3), G(SE_1), G(SE_5), G(SE_7), _______,
+  _______, xxxxxxx, xxxxxxx, xxxxxxx, G(SE_8), xxxxxxx, _______,         _______, xxxxxxx, G(SE_9), xxxxxxx, xxxxxxx, xxxxxxx, _______,
   _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
 				       			_______,	 _______,
-        			      _______,G(KC_SPC), _______,         _______, _______, _______
+        			      TG_WNAV, _______, _______,         _______, _______, TO_BASE 
     ),
 [_FUN] = LAYOUT_ergodox_pretty(
   _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
@@ -140,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
 				       			_______,	 _______,
-        			          FUN, _______, _______,         _______, _______, _______
+        			          _______, FUN, _______,         _______, _______, _______
     ),
 };
 
@@ -236,4 +236,27 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
     }
 }
 
+// Runs whenever there is a layer state change.
+layer_state_t layer_state_set_user(layer_state_t state) {
+    ergodox_board_led_off();
+    ergodox_right_led_1_off();
+    ergodox_right_led_2_off();
+    ergodox_right_led_3_off();
 
+    uint8_t layer = get_highest_layer(state);
+    switch (layer) {
+        case _BASE:
+            break;
+        case _NAV:
+            ergodox_right_led_3_on();
+            break;
+        case _WNAV:
+            ergodox_right_led_2_on();
+            ergodox_right_led_3_on();
+            break;
+	default:
+            break;
+    }
+
+    return state;
+};
