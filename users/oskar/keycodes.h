@@ -77,9 +77,11 @@ enum custom_keycodes {
 
 #define xxxxxxx KC_NO
 
-#define R_THMB OS_SHFT
+#define TG_NAV TG(_NAV)
+#define TO_BASE TO(_BASE)
+#define R_THMB TG_NAV
 
-#define MT_SPC LT(_NAV, KC_SPC)
+#define MT_SPC KC_SPC
 #define MY_RALT OSM(MOD_RALT)
 #define DN_CTRL LCTL_T(KC_DOWN)
 
