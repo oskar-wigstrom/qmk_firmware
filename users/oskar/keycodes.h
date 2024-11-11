@@ -13,13 +13,11 @@ enum layers {
     _SWE,
     _NUM,
     _NAV,
-    _WNAV,
-    _WIN,
     _SYM,
     _MODS,
     _SHRT,
-    _SPEC,
     _FUN,
+    _SPEC,
 };
 
 enum custom_keycodes {
@@ -35,12 +33,6 @@ enum custom_keycodes {
     // Vim  + tmux
     VIM_TMUX_VS,
     VIM_TMUX_SP,
-
-
-    // Multiple chars
-    QU,
-    SC,
-    AT_U,
 
     // É
     E_ACUT,
@@ -79,9 +71,9 @@ enum custom_keycodes {
 
 #define TG_NAV TG(_NAV)
 #define TO_BASE TO(_BASE)
-#define R_THMB TG_NAV
+#define R_THMB KC_ENT
 
-#define MT_SPC KC_SPC
+#define MT_SPC LT(_NAV, KC_SPC)
 #define MY_RALT OSM(MOD_RALT)
 #define DN_CTRL LCTL_T(KC_DOWN)
 
@@ -96,7 +88,7 @@ enum custom_keycodes {
 
 #define MY_LALT OSM(MOD_LALT)
 
-#define SHRT OSL(_SHRT)
+#define NUM OSL(_NUM)
 #define WNAV MO(_WNAV)
 #define TG_WNAV TG(_WNAV)
 #define OPT OSL(_OPT)

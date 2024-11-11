@@ -92,16 +92,6 @@ void tap_caps_lock(void) {
     tap_code(swap_caps_escape ? KC_ESC : KC_CAPS);
 }
 
-void enable_gaming(void) {
-    /* autoshift_disable(); */
-    /* layer_on(_GAME); */
-}
-void disable_gaming(void) {
-    /* autoshift_enable(); */
-    /* layer_off(_GAME); */
-    /* layer_off(_GAME2); */
-}
-
 void tap_space_shift(uint16_t key, bool key_down) {
     if (key_down) {
         tap_code16(key);
@@ -180,8 +170,6 @@ bool terminate_case_modes(uint16_t keycode, const keyrecord_t *record) {
         case SE_ARNG:
         case SE_ADIA:
         case SE_ODIA:
-        case QU:
-        case SC:
         case SE_MINS:
         case SE_UNDS:
         case KC_BSPC:
@@ -279,11 +267,17 @@ bool tap_hold(uint16_t keycode) {
         case SE_QUES:
         case SE_HASH:
         case SE_LPRN:
+        case SE_RPRN:
         case SE_LCBR:
         case SE_LBRC:
         case SE_EQL:
         case SE_UNDS:
-        case SE_0:
+        case SE_1:
+        case SE_2:
+        case SE_3:
+        case SE_4:
+        case SE_5:
+        case SE_6:
         case G(SE_0):
         case G(SE_1):
         case G(SE_2):
@@ -304,8 +298,6 @@ bool tap_hold(uint16_t keycode) {
         case SE_ARNG:
         case SE_ADIA:
         case SE_ODIA:
-        case QU:
-        case SC:
         case E_ACUT:
         case CLOSE_WIN:
         case C(SE_A):
@@ -336,20 +328,6 @@ void tap_hold_send_tap(uint16_t keycode) {
             register_key_to_repeat(keycode);
             tap_undead_key(true, SE_GRV);
             return;
-        case QU:
-            send_string("qu");
-            return;
-        case SC:
-            send_string("sc");
-            return;
-        case SE_Q:
-        case SE_Z:
-            if (IS_LAYER_ON(_SHRT) || last_key_up == SHRT) {
-                tap16_repeatable(C(keycode));
-            } else {
-                tap16_repeatable(keycode);
-            }
-            return;
         case E_ACUT:
             tap_code16(SE_ACUT);
             tap_code16(SE_E);
@@ -379,57 +357,55 @@ void tap_hold_send_hold(uint16_t keycode) {
     disable_caps_word();
 
     switch (keycode) {
+        case SE_SLSH:
         case SE_LABK:
         case SE_RABK:
-        case SE_UNDS:
             // FIXME should be repeatable
             double_tap(keycode);
             return;
         case SE_DQUO:
-        case SE_DOT:
         case SE_0:
-            triple_tap(keycode);
-            return;
-        case SE_PERC:
-            send_string("%{}");
+            triple_tap(keycode); // Can be changed
             return;
         case GRV:
             tap_undead_key(true, SE_GRV);
             tap_undead_key(true, SE_GRV);
             tap_undead_key(true, SE_GRV);
             return;
-        case SE_AT:
-            tap_code16(SE_AT);
-            tap16_repeatable(SE_U);
-            return;
         case SE_PIPE:
         case SE_AMPR:
         case SE_EQL:
             double_tap_space(keycode);
             return;
-        case SE_EXLM:
-            send_string(" != ");
+        case SE_UNDS:
+            tap_code16(SE_MINS);
             return;
-        case SE_QUES:
-            send_string("{:?}");
-            return;
-        case SE_HASH:
-            send_string("{:#?}");
+        case SE_DOT:
+            tap_code16(SE_COMM);
             return;
         case SE_LPRN:
-            double_parens_left(keycode, SE_RPRN);
+            tap_code16(SE_LBRC);
             return;
-        case SE_LCBR:
-            double_parens_left(keycode, SE_RCBR);
+        case SE_RPRN:
+            tap_code16(SE_RBRC);
             return;
-        case SE_LBRC:
-            double_parens_left(keycode, SE_RBRC);
+        case SE_1:
+            tap_code16(SE_EXLM);
             return;
-        case QU:
-            send_string("Qu");
+        case SE_2:
+            tap_code16(SE_AT);
             return;
-        case SC:
-            send_string("Sc");
+        case SE_3:
+            tap_code16(SE_HASH);
+            return;
+        case SE_4:
+            tap_code16(SE_DLR);
+            return;
+        case SE_5:
+            tap_code16(SE_PERC);
+            return;
+        case SE_6:
+            tap_code16(SE_AMPR);
             return;
         case E_ACUT:
             tap_code16(SE_ACUT);
@@ -437,14 +413,6 @@ void tap_hold_send_hold(uint16_t keycode) {
             return;
         case CLOSE_WIN:
             tap16_repeatable(S(G(SE_C)));
-            return;
-        case SE_Q:
-        case SE_Z:
-            if (IS_LAYER_ON(_SHRT) || last_key_up == SHRT) {
-                tap16_repeatable(S(C(keycode)));
-            } else {
-                tap16_repeatable(S(keycode));
-            }
             return;
         case VIM_TMUX_SP:
             tap_code16(C(SE_B));
@@ -463,70 +431,47 @@ uint16_t tap_hold_timeout(uint16_t keycode) {
     switch (keycode) {
         // Extra
         case CLOSE_WIN:
-            return 160;
+            return 180;
         // Thumb
-        case SE_E:
-            return 120;
+        // No key here.
         // Pinky
-        case SE_R:
-        case SE_COMM:
-        case SE_UNDS:
-        // case UNDS_ODIA:
-        case SE_6:
-        case G(SE_6):
-        case SE_7:
-        case G(SE_7):
-        case C(SE_R):
-        case C(SE_X):
-            return 135;
-        // Ring
-        case SE_J:
-        case SE_C:
-        case SE_S:
-        case SE_V:
-        case SE_U:
+        case SE_Q:
+        case SE_A:
+        case SE_Z:
         case SE_DOT:
+        case SE_O:
+        case SE_UNDS:
+        case SE_ODIA:
+            return 155;
+        // Ring
+        case SE_W:
+        case SE_R:
+        case SE_X:
+        case SE_Y:
         case SE_I:
         case SE_RPRN:
-        // case RPRN_ADIA:
-        case SE_Q:
-        case QU:
-        case SE_4:
-        case G(SE_4):
-        case SE_5:
-        case G(SE_5):
-        case G(SE_J):
-        case G(SE_R):
-        case C(SE_A):
-        case C(SE_C):
-        case C(SE_S):
-        case C(SE_V):
-            return 105;
+        case SE_ADIA:
+        case C(SE_9):
+        case C(SE_6):
+        case C(SE_3):
+            return 125;
         // Middle
-        case SE_Y:
-        case SE_T:
-        case SE_G:
-        case SE_O:
-        case SE_A:
+        case SE_F:
+        case SE_S:
+        case SE_C:
+        case SE_U:
+        case SE_E:
         case SE_LPRN:
-        // case LPRN_ARNG:
-        case SE_Z:
-        case SE_0:
-        case G(SE_0):
-        case SE_1:
-        case G(SE_1):
-        case C(SE_W):
-        case C(SE_T):
-        case C(SE_G):
-            return 100;
+        case SE_ARNG:
+        case SE_8:
+        case SE_5:
+        case SE_2:
+            return 120;
         // Slow index
-        case SE_P:
-        case SE_X:
-        case C(SE_E):
-            return 105;
+        // Non here at the moment
         // Index
         default:
-            return 100;
+            return 120;
     }
 }
 
@@ -652,12 +597,6 @@ bool _process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code16(S(SE_G));
             }
             return false;
-        case AT_U:
-            if (record->event.pressed) {
-                tap_code16(SE_AT);
-                tap16_repeatable(SE_U);
-            }
-            return false;
         case COLN_SYM:
             if (record->tap.count && record->event.pressed) {
                 tap16_repeatable(SE_COLN);
@@ -682,18 +621,6 @@ bool _process_record_user(uint16_t keycode, keyrecord_t *record) {
                     tap_code16(swe_key);
                 }
                 layer_invert(_SWE);
-            }
-            return false;
-        case WIN_ALT:
-            // Always start by sending Alt Tab to goto the next window with only a combo tap.
-            // We can then do Tab/S-Tab to continue moving around the windows if we want to.
-            if (record->event.pressed) {
-                register_code(KC_LALT);
-                tap_code16(KC_TAB);
-                layer_on(_WIN);
-            } else {
-                layer_off(_WIN);
-                unregister_code(KC_LALT);
             }
             return false;
         case LEADER:
