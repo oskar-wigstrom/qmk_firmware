@@ -33,14 +33,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 `--------------------'       `----------------------'
  */
 [_BASE] = LAYOUT_ergodox_pretty(
-  _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
-  _______, SE_Q,    SE_W,    SE_F,    SE_P,    SE_B,    _______,         _______, SE_J,    SE_L,    SE_U,    SE_Y,    SE_DOT,  _______,
+  _______, SE_1,    SE_2,    SE_3,    SE_4,    SE_5,    _______,         _______, SE_6,    SE_7,    SE_8,    SE_9,    SE_0,    _______,
+  _______, SE_COMM, SE_W,    SE_F,    SE_P,    SE_B,    _______,         _______, SE_J,    SE_L,    SE_U,    SE_Y,    SE_DOT,  _______,
   _______, SE_A,    SE_R,    SE_S,    SE_T,    SE_G,                              SE_M,    SE_N,    SE_E,    SE_I,    SE_O,    _______,
-  _______, SE_Z,    SE_X,    SE_C,    SE_D,    SE_V,    _______,         _______, SE_K,    SE_H,    SE_LPRN, SE_RPRN, SE_UNDS, _______,
+  _______, SE_SLSH, SE_X,    SE_C,    SE_D,    SE_V,    _______,         _______, SE_K,    SE_H,    SE_LPRN, SE_RPRN, SE_UNDS, _______,
   _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
 				       			_______,	 _______,
-        				         MT_SPC,  KC_TAB, _______,         _______,    _______,  R_THMB
+        				         MT_SPC,  _______, _______,         _______,    _______,  R_THMB
       ),
 [_SWE] = LAYOUT_ergodox_pretty(
   _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
@@ -65,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_SYM] = LAYOUT_ergodox_pretty(
   _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
   _______, TILD,    SE_PLUS, SE_ASTR, SE_EXLM,    CIRC, _______,         _______, _______, SE_7,    SE_8,    SE_9,    _______,  _______,
-  _______, SE_PIPE, SE_LCBR, SE_RCBR, SE_SLSH, SE_BSLS,                           _______, SE_4,    SE_5,    SE_6,    _______,  _______,
+  _______, SE_PIPE, SE_LCBR, SE_RCBR, SE_MINS, SE_BSLS,                           _______, SE_4,    SE_5,    SE_6,    _______,  _______,
   _______, SE_COMM, SE_LABK, SE_RABK, SE_QUES,     GRV, _______,         _______, _______, SE_1,    SE_2,    SE_3,    _______, _______,
   _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
@@ -136,7 +136,7 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
         case coln_sym:
         case ctrl_combo_r:
         case quot:
-        case vim_tmux_sp:
+        case split:
         case gui_combo_l:
         case gui_combo_r:
         case dlr:
@@ -147,7 +147,7 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
         case large_right_arrow:
         case small_right_arrow:
         case pipe_to: */
-        case vim_tmux_vs:
+        case split_vs:
 //        case gt_eq:
             return COMBO_TERM + 55;
         // Regular combos, slightly relaxed
@@ -179,8 +179,8 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
         case shift_combo_r:
         case close_win:
         case escape_sym:
-        case vim_tmux_vs:
-        case vim_tmux_sp:
+        case split_vs:
+        case split:
         case coln_sym:
         case dquo:
         case lalt:

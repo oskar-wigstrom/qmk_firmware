@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 #include QMK_KEYBOARD_H
 #include "keycodes.h"
 
@@ -28,10 +28,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * Base Layer: Modified RSTHD
      */
     [_BASE] = LAYOUT_planck_1x2uC(
-      SE_Q,    SE_W,    SE_F,    SE_P,    SE_B,   _______,  _______,   SE_J,    SE_L,    SE_U,    SE_Y,    SE_DOT,
+      SE_COMM, SE_W,    SE_F,    SE_P,    SE_B,   _______,  _______,   SE_J,    SE_L,    SE_U,    SE_Y,    SE_DOT,
       SE_A,    SE_R,    SE_S,    SE_T,    SE_G,   _______,  _______,   SE_M,    SE_N,    SE_E,    SE_I,    SE_O, //REPEAT rem.
-      SE_Z,    SE_X,    SE_C,    SE_D,    SE_V,   _______,  _______,   SE_K,    SE_H,    SE_LPRN, SE_RPRN, SE_UNDS,
-      _______, _______, _______, KC_TAB,  MT_SPC, _______,             R_THMB, _______, _______, _______, _______
+      SE_SLSH, SE_X,    SE_C,    SE_D,    SE_V,   _______,  _______,   SE_K,    SE_H,    SE_LPRN, SE_RPRN, SE_UNDS,
+      _______, _______, _______, _______,  MT_SPC, _______,             R_THMB, _______, _______, _______, _______
     ),
     [_SWE]  = LAYOUT_planck_1x2uC(
       _______, _______, _______, _______, _______, _______,  _______,  _______, _______, _______, _______, _______,
@@ -111,7 +111,7 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
         case large_right_arrow:
         case small_right_arrow:
         case pipe_to: */
-        case vim_tmux_vs:
+        case split_vs:
 //        case gt_eq:
             return COMBO_TERM + 55;
         // Regular combos, slightly relaxed
@@ -149,8 +149,8 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
         case shift_combo_r:
         case close_win:
         case escape_sym:
-        case vim_tmux_vs:
-        case vim_tmux_sp:
+        case split_vs:
+        case split:
         case coln_sym:
         case dquo:
         case lalt:
@@ -169,7 +169,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
     uint8_t layer = get_highest_layer(state);
     switch (layer) {
-        case _BASE:     
+        case _BASE:
             break;
         case _NAV:
             planck_ez_right_led_on();

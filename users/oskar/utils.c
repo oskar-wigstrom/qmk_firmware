@@ -217,8 +217,8 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
         case OS_CTRL:
         case OS_ALT:
         case OS_GUI:
-        case VIM_TMUX_SP:
-        case VIM_TMUX_VS:
+        case SPLIT_VS:
+        case SPLIT:
         case TAB_MOD:
             return true;
         default:
@@ -257,7 +257,6 @@ bool tap_hold(uint16_t keycode) {
         case SE_DQUO:
         case SE_LABK:
         case SE_RABK:
-        case SE_DOT:
         case SE_PERC:
         case GRV:
         case SE_AT:
@@ -271,13 +270,16 @@ bool tap_hold(uint16_t keycode) {
         case SE_LCBR:
         case SE_LBRC:
         case SE_EQL:
-        case SE_UNDS:
         case SE_1:
         case SE_2:
         case SE_3:
         case SE_4:
         case SE_5:
         case SE_6:
+        case SE_7:
+        case SE_8:
+        case SE_9:
+        case SE_0:
         case G(SE_0):
         case G(SE_1):
         case G(SE_2):
@@ -294,7 +296,7 @@ bool tap_hold(uint16_t keycode) {
         case G(SE_E):
         case G(SE_R):
         case G(SE_C):
-        case SE_A ... SE_Z:
+//        case SE_A ... SE_Z:
         case SE_ARNG:
         case SE_ADIA:
         case SE_ODIA:
@@ -314,8 +316,8 @@ bool tap_hold(uint16_t keycode) {
         case C(SE_G):
         case C(SE_D):
         case C(SE_B):
-        case VIM_TMUX_SP:
-        case VIM_TMUX_VS:
+        case SPLIT:
+        case SPLIT_VS:
             return true;
         default:
             return false;
@@ -340,11 +342,11 @@ void tap_hold_send_tap(uint16_t keycode) {
             /* tap_code(SE_Q); */
             /* tap_code(KC_ENT); */
             return;
-        case VIM_TMUX_SP:
+        case SPLIT:
             tap_code16(C(SE_W));
             tap_code(SE_S);
             return;
-        case VIM_TMUX_VS:
+        case SPLIT_VS:
             tap_code16(C(SE_W));
             tap_code(SE_V);
             return;
@@ -414,11 +416,11 @@ void tap_hold_send_hold(uint16_t keycode) {
         case CLOSE_WIN:
             tap16_repeatable(S(G(SE_C)));
             return;
-        case VIM_TMUX_SP:
+        case SPLIT:
             tap_code16(C(SE_B));
             send_string("\"");
             return;
-        case VIM_TMUX_VS:
+        case SPLIT_VS:
             tap_code16(C(SE_B));
             send_string("%");
             return;
