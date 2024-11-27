@@ -1,32 +1,34 @@
 // Left top row
+COMB(q_comb,            SE_Q,           SE_W, SE_F)
+COMB(z_comb,            SE_Z,           SE_F, SE_P)
 COMB(ctrl_w,            C(SE_W),        SE_W, SE_F, SE_P)
 COMB(clear,             CLEAR,          SE_P, SE_B)
 
 // Right top row
 COMB(eql,               SE_EQL,         SE_L, SE_U)
 COMB(backsp,            KC_BSPC,        SE_U, SE_Y)
-COMB(ctrl_w2,            C(SE_W),        SE_L, SE_U, SE_I)
+COMB(ctrl_w2,           C(SE_W),        SE_L, SE_U, SE_Y)
 
 
 // Left home row
 COMB(ctrl_combo_l,      OS_CTRL,        SE_R, SE_S)
 COMB(escape_sym,        ESC_SYM,        SE_S, SE_T)
 COMB(dquo,              SE_DQUO,        SE_R, SE_T)
-// COMB(tab_mod,           TAB_MOD,        SE_R, SE_S, SE_T)
+COMB(tab_mod,           TAB_MOD,        SE_R, SE_S, SE_T)
 COMB(del,               KC_DEL,         SE_T, SE_G)
 
 // Right home row
 COMB(coln_sym,          COLN_SYM,       SE_N, SE_E)
 COMB(ctrl_combo_r,      OS_CTRL,        SE_E, SE_I)
 COMB(quot,              SE_QUOT,        SE_N, SE_I)
-// COMB(ent,               KC_ENT,         SE_N, SE_E, SE_I)
+COMB(ent,               KC_ENT,         SE_N, SE_E, SE_I)
 COMB(save_vim,          SAVE_VIM,       SE_N, SE_E, SE_I, SE_O)
 
 // Mixed
 COMB(capsword,          CAPSWORD,       SE_S, SE_E)
 
 // Left bottom row
-COMB(vim_tmux_vs,       VIM_TMUX_VS,    SE_X, SE_C)
+COMB(split_vs,          SPLIT_VS,       SE_X, SE_C)
 COMB(gui_combo_l,       OS_GUI,         SE_C, SE_D)
 COMB(lalt,              MY_LALT,        SE_X, SE_D)
 COMB(close_win,         CLOSE_WIN,      SE_X, SE_C, SE_D)
@@ -36,13 +38,13 @@ COMB(shift_combo_l,     KC_LSFT,        SE_D, SE_V)
 COMB(shift_combo_r,     KC_RSFT,        SE_K, SE_H)
 COMB(gui_combo_r,       OS_GUI,         SE_H, SE_LPRN)
 COMB(dlr,               SE_DLR,         SE_LPRN, SE_RPRN)
-// COMB(leader,            LEADER,         SE_L, SE_RPRN)       // *******
+// COMB(leader,            LEADER,         SE_H, SE_RPRN)       // *******
 COMB(swe,               TG_SWE,         SE_H, SE_LPRN, SE_RPRN)
 
 // Mixed home row + other
 COMB(scln,              SE_SCLN,        SE_S, SE_D)
 COMB(win_alt,           WIN_ALT,        SE_H, SE_E)
-COMB(vim_tmux_sp,       VIM_TMUX_SP,    SE_R, SE_C)
+COMB(split,             SPLIT,          SE_R, SE_C)
 
 // Thumbs
 //COMB(num,               NUMWORD,        MT_SPC, R_THMB)       // *******
@@ -80,4 +82,4 @@ COMB(adia,              SE_ADIA,        MT_SPC, SE_RPRN)
 COMB(odia,              SE_ODIA,        MT_SPC, SE_UNDS)
 
 // Specials
-COMB(ctrl_gui_space,    C(G(KC_SPACE)), MT_SPC, SE_N, SE_A)
+COMB(ctrl_gui_space,    C(G(KC_SPACE)), MT_SPC, SE_N, SE_E)

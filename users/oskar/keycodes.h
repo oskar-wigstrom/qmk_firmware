@@ -29,10 +29,8 @@ enum custom_keycodes {
     // Vim
     SAVE_VIM,
     CLOSE_WIN,
-
-    // Vim  + tmux
-    VIM_TMUX_VS,
-    VIM_TMUX_SP,
+    SPLIT_VS,
+    SPLIT,
 
     // É
     E_ACUT,
@@ -71,7 +69,7 @@ enum custom_keycodes {
 
 #define TG_NAV TG(_NAV)
 #define TO_BASE TO(_BASE)
-#define R_THMB KC_ENT
+#define R_THMB OS_SHFT
 
 #define MT_SPC LT(_NAV, KC_SPC)
 #define MY_RALT OSM(MOD_RALT)
