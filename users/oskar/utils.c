@@ -245,16 +245,11 @@ void process_oneshot_post(uint16_t keycode, keyrecord_t *record) {
     update_oneshot_post(&os_gui_state, KC_LGUI, OS_GUI, keycode, record);
 }
 
-void process_oneshot_key(uint16_t keycode, keyrecord_t *record) {
-    update_oneshot_pre(&os_shft_state, KC_LSFT, OS_SHFT, keycode, record);
-    update_oneshot_post(&os_ctrl_state, KC_LCTL, OS_CTRL, keycode, record);
-}
-
 // Tap hold
-
 bool tap_hold(uint16_t keycode) {
     switch (keycode) {
         case SE_DQUO:
+        case SE_QUOT:
         case SE_LABK:
         case SE_RABK:
         case SE_PERC:
@@ -270,16 +265,16 @@ bool tap_hold(uint16_t keycode) {
         case SE_LCBR:
         case SE_LBRC:
         case SE_EQL:
-        case SE_1:
-        case SE_2:
-        case SE_3:
-        case SE_4:
-        case SE_5:
-        case SE_6:
-        case SE_7:
-        case SE_8:
-        case SE_9:
-        case SE_0:
+//        case SE_1:
+//        case SE_2:
+//        case SE_3:
+//        case SE_4:
+//        case SE_5:
+//        case SE_6:
+//        case SE_7:
+//        case SE_8:
+//        case SE_9:
+//        case SE_0:
         case G(SE_0):
         case G(SE_1):
         case G(SE_2):
@@ -296,6 +291,9 @@ bool tap_hold(uint16_t keycode) {
         case G(SE_E):
         case G(SE_R):
         case G(SE_C):
+        case G(SE_P):
+        case G(KC_SPC):
+        case G(KC_ENT):
 //        case SE_A ... SE_Z:
         case SE_ARNG:
         case SE_ADIA:
@@ -318,6 +316,7 @@ bool tap_hold(uint16_t keycode) {
         case C(SE_B):
         case SPLIT:
         case SPLIT_VS:
+        case KC_ENT:
             return true;
         default:
             return false;
@@ -391,24 +390,6 @@ void tap_hold_send_hold(uint16_t keycode) {
         case SE_RPRN:
             tap_code16(SE_RBRC);
             return;
-        case SE_1:
-            tap_code16(SE_EXLM);
-            return;
-        case SE_2:
-            tap_code16(SE_AT);
-            return;
-        case SE_3:
-            tap_code16(SE_HASH);
-            return;
-        case SE_4:
-            tap_code16(SE_DLR);
-            return;
-        case SE_5:
-            tap_code16(SE_PERC);
-            return;
-        case SE_6:
-            tap_code16(SE_AMPR);
-            return;
         case E_ACUT:
             tap_code16(SE_ACUT);
             tap_code16(S(SE_E));
@@ -444,7 +425,7 @@ uint16_t tap_hold_timeout(uint16_t keycode) {
         case SE_O:
         case SE_UNDS:
         case SE_ODIA:
-            return 155;
+            return 135;
         // Ring
         case SE_W:
         case SE_R:
@@ -456,7 +437,7 @@ uint16_t tap_hold_timeout(uint16_t keycode) {
         case C(SE_9):
         case C(SE_6):
         case C(SE_3):
-            return 125;
+            return 115;
         // Middle
         case SE_F:
         case SE_S:
@@ -468,12 +449,12 @@ uint16_t tap_hold_timeout(uint16_t keycode) {
         case SE_8:
         case SE_5:
         case SE_2:
-            return 120;
+            return 110;
         // Slow index
         // Non here at the moment
         // Index
         default:
-            return 120;
+            return 110;
     }
 }
 
