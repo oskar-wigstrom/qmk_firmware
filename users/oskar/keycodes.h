@@ -13,6 +13,7 @@ enum layers {
     _SWE,
     _NUM,
     _NAV,
+    _WNAV,
     _SYM,
     _MODS,
     _SHRT,
@@ -37,9 +38,6 @@ enum custom_keycodes {
 
     // Custom keycodes for instant processing for NUMWORD
     NUM_G,
-
-    // Custom Win + Alt for window toggling on Windows
-    WIN_ALT,
 
     // Instant oneshot mods
     OS_SHFT,
@@ -87,8 +85,7 @@ enum custom_keycodes {
 #define MY_LALT OSM(MOD_LALT)
 
 #define NUM OSL(_NUM)
-#define WNAV MO(_WNAV)
-#define TG_WNAV TG(_WNAV)
+#define OS_WNAV OSL(_WNAV)
 #define OPT OSL(_OPT)
 #define SPEC OSL(_SPEC)
 #define FUN OSL(_FUN)

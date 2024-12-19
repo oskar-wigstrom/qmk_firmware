@@ -60,13 +60,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
 				       			_______,	 _______,
-        			      TG_NAV, _______, _______,         _______,    _______, _______
+        			            _______, _______, _______,         _______,    _______, _______
+    ),
+[_WNAV] = LAYOUT_ergodox_pretty(
+  _______, G(SE_1), G(SE_2),    G(SE_3),   G(SE_4), G(SE_5), _______,         _______, G(SE_6), G(SE_7), G(SE_8), G(SE_9), _______, _______,
+  _______, G(SE_Q), G(SE_COMM), G(SE_DOT), G(SE_P), xxxxxxx,_______,          _______, G(SE_J), G(SE_7), G(SE_8), G(SE_9), xxxxxxx, _______,
+  _______, G(SE_W), G(SE_E),    G(SE_R),   G(SE_T), xxxxxxx,                           G(SE_H), G(SE_4), G(SE_5), G(SE_6), G(SE_L), _______,
+  _______, xxxxxxx, G(SE_C),    xxxxxxx,   xxxxxxx, xxxxxxx, _______,         _______, G(SE_K), G(SE_1), G(SE_2), G(SE_3), xxxxxxx, _______,
+  _______, _______, _______,    _______,   _______,                                             _______, _______, _______, _______, _______,
+  					            _______,   _______,                           _______, _______,
+				       			_______,                                               _______,
+        			   G(KC_SPC), _______, _______,                           _______,  G(KC_M), G(KC_ENT)
     ),
 [_SYM] = LAYOUT_ergodox_pretty(
   _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
   _______, TILD,    SE_PLUS, SE_ASTR, SE_EXLM,    CIRC, _______,         _______, _______, SE_7,    SE_8,    SE_9,    _______,  _______,
   _______, SE_PIPE, SE_LCBR, SE_RCBR, SE_MINS, SE_BSLS,                           _______, SE_4,    SE_5,    SE_6,    _______,  _______,
-  _______, SE_COMM, SE_LABK, SE_RABK, SE_QUES,     GRV, _______,         _______, _______, SE_1,    SE_2,    SE_3,    _______, _______,
+  _______, SE_QUES, SE_LABK, SE_RABK, SE_PERC,     GRV, _______,         _______, _______, SE_1,    SE_2,    SE_3,    _______, _______,
   _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
 				       			_______,	 _______,
@@ -129,12 +139,10 @@ rgb_matrix_mode(RGB_MATRIX_TYPING_HEATMAP);
 uint16_t get_combo_term(uint16_t index, combo_t *combo) {
     switch (index) {
         // Home-row and other tight combos
-        case ctrl_combo_l:
         case escape_sym:
         case del:
         case dquo:
         case coln_sym:
-        case ctrl_combo_r:
         case quot:
         case split:
         case gui_combo_l:
@@ -160,6 +168,7 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
     switch (index) {
         case del:
         case backsp:
+        case comb_ques:
         case comb_perc:
         case comb_grv:
         case comb_pipe:
@@ -175,16 +184,15 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
         case gui_combo_r:
         case ctrl_combo_l:
         case ctrl_combo_r:
-        case shift_combo_l:
-        case shift_combo_r:
         case close_win:
         case escape_sym:
         case split_vs:
         case split:
         case coln_sym:
         case dquo:
+        case quot:
+        case ent:
         case lalt:
-        case win_alt:
             return false;
         default:
             return true;

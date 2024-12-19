@@ -29,21 +29,20 @@ COMB(capsword,          CAPSWORD,       SE_S, SE_E)
 
 // Left bottom row
 COMB(split_vs,          SPLIT_VS,       SE_X, SE_C)
-COMB(gui_combo_l,       OS_GUI,         SE_C, SE_D)
+COMB(gui_combo_l,       OS_WNAV,        SE_C, SE_D)
 COMB(lalt,              MY_LALT,        SE_X, SE_D)
 COMB(close_win,         CLOSE_WIN,      SE_X, SE_C, SE_D)
-COMB(shift_combo_l,     KC_LSFT,        SE_D, SE_V)
 
 // Right bottom row
 COMB(shift_combo_r,     KC_RSFT,        SE_K, SE_H)
-COMB(gui_combo_r,       OS_GUI,         SE_H, SE_LPRN)
+COMB(gui_combo_r,       OS_WNAV,        SE_H, SE_LPRN)
 COMB(dlr,               SE_DLR,         SE_LPRN, SE_RPRN)
 // COMB(leader,            LEADER,         SE_H, SE_RPRN)       // *******
 COMB(swe,               TG_SWE,         SE_H, SE_LPRN, SE_RPRN)
 
 // Mixed home row + other
 COMB(scln,              SE_SCLN,        SE_S, SE_D)
-COMB(win_alt,           WIN_ALT,        SE_H, SE_E)
+// COMB(win_alt,           WIN_ALT,        SE_H, SE_E)
 COMB(split,             SPLIT,          SE_R, SE_C)
 
 // Thumbs
@@ -61,13 +60,14 @@ COMB(comb_circ,         CIRC,           MT_SPC, SE_B)
 COMB(comb_pipe,         SE_PIPE,        MT_SPC, SE_A)
 COMB(comb_lcbr,         SE_LCBR,        MT_SPC, SE_R)
 COMB(comb_rcbr,         SE_RCBR,        MT_SPC, SE_S)
-COMB(comb_mins,         SE_SLSH,        MT_SPC, SE_T)
+COMB(comb_mins,         SE_MINS,        MT_SPC, SE_T)
 COMB(comb_bsls,         SE_BSLS,        MT_SPC, SE_G)
 COMB(comb_4,            SE_4,           R_THMB, SE_N)
 COMB(comb_5,            SE_5,           R_THMB, SE_E)
 COMB(comb_6,            SE_6,           R_THMB, SE_I)
 
 // Lower
+COMB(comb_ques,         SE_QUES,        MT_SPC, SE_SLSH)
 COMB(comb_labk,         SE_LABK,        MT_SPC, SE_X)
 COMB(comb_rabk,         SE_RABK,        MT_SPC, SE_C)
 COMB(comb_perc,         SE_PERC,        MT_SPC, SE_D)
