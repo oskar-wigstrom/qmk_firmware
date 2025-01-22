@@ -24,12 +24,12 @@ static uint16_t last_key_down = KC_NO;
 static uint16_t last_key_up   = KC_NO;
 
 static bool linux_mode = true;
-bool in_linux(void) {
+bool        in_linux(void) {
     return linux_mode;
 }
 
 static bool swap_caps_escape = false;
-bool is_caps_swapped(void) {
+bool        is_caps_swapped(void) {
     return swap_caps_escape;
 }
 
@@ -130,7 +130,6 @@ uint16_t corresponding_swe_key(uint16_t keycode) {
     }
 }
 
-
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo) {
     // FIXME this doesn't seem to work?
     return true;
@@ -147,10 +146,9 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo) {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case MT_SPC:
+        case L_THMB_L:
+        case R_THMB_R:
             return TAPPING_TERM + THUMB_TERM;
-        case DN_CTRL:
-            return TAPPING_TERM + MIDDLE_TERM;
         default:
             return TAPPING_TERM;
     }
@@ -254,7 +252,9 @@ bool tap_hold(uint16_t keycode) {
         case SE_RABK:
         case SE_PERC:
         case GRV:
-        case SE_AT:
+        case AT_E:
+        case QE:
+            //        case SE_AT:
         case SE_PIPE:
         case SE_EXLM:
         case SE_AMPR:
@@ -265,16 +265,16 @@ bool tap_hold(uint16_t keycode) {
         case SE_LCBR:
         case SE_LBRC:
         case SE_EQL:
-//        case SE_1:
-//        case SE_2:
-//        case SE_3:
-//        case SE_4:
-//        case SE_5:
-//        case SE_6:
-//        case SE_7:
-//        case SE_8:
-//        case SE_9:
-//        case SE_0:
+            //        case SE_1:
+            //        case SE_2:
+            //        case SE_3:
+            //        case SE_4:
+            //        case SE_5:
+            //        case SE_6:
+            //        case SE_7:
+            //        case SE_8:
+            //        case SE_9:
+            //        case SE_0:
         case G(SE_0):
         case G(SE_1):
         case G(SE_2):
@@ -294,7 +294,7 @@ bool tap_hold(uint16_t keycode) {
         case G(SE_P):
         case G(KC_SPC):
         case G(KC_ENT):
-//        case SE_A ... SE_Z:
+            //        case SE_A ... SE_Z:
         case SE_ARNG:
         case SE_ADIA:
         case SE_ODIA:
@@ -348,6 +348,12 @@ void tap_hold_send_tap(uint16_t keycode) {
         case SPLIT_VS:
             tap_code16(C(SE_W));
             tap_code(SE_V);
+            return;
+        case AT_E:
+            send_string("@e");
+            return;
+        case QE:
+            send_string("qe");
             return;
         default:
             tap16_repeatable(keycode);
@@ -631,8 +637,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     // Space needs some special handling to not interfere with NAV toggling.
     // Maybe there's a more general way to do this, but I dunno.
-    if (keycode == MT_SPC) {
-        if (!record->event.pressed && last_key_down == MT_SPC) {
+    if (keycode == L_THMB_L) {
+        if (!record->event.pressed && last_key_down == L_THMB_L) {
             register_key_to_repeat(KC_SPC);
         }
     } else if (res && record->event.pressed) {

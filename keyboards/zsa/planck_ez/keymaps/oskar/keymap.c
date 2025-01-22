@@ -22,7 +22,7 @@
 #ifdef CONSOLE_ENABLE
 #    include "print.h"
 #endif
-
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
      * Base Layer: Modified RSTHD
@@ -91,34 +91,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, _______, _______, FUN,     _______,   _______,           _______, _______, _______, _______, _______
     )
 };
-
-
+// clang-format on
 
 // Combos
 
 uint16_t get_combo_term(uint16_t index, combo_t *combo) {
     switch (index) {
-        // Home-row and other tight combos
-        case ctrl_combo_l:
+            // Home-row and other tight combos
         case escape_sym:
         case del:
         case dquo:
         case coln_sym:
-        case ctrl_combo_r:
         case quot:
         case split:
+        case ctrl_combo_l:
+        case ctrl_combo_r:
         case gui_combo_l:
         case gui_combo_r:
-        case dlr:
             return COMBO_TERM;
-        // Vertical combos, very relaxed
-/*      case small_left_arrow:
-        case lt_eq:
-        case large_right_arrow:
-        case small_right_arrow:
-        case pipe_to: */
+            // Very relaxed
+        case qe_comb:
         case split_vs:
-//        case gt_eq:
+            //        case gt_eq:
             return COMBO_TERM + 55;
         // Regular combos, slightly relaxed
         default:
@@ -147,6 +141,8 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
         case adia:
         case odia:
         case eql:
+        case shift_combo_l:
+        case shift_combo_r:
         case gui_combo_l:
         case gui_combo_r:
         case ctrl_combo_l:
@@ -166,7 +162,6 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
 
 // Runs whenever there is a layer state change.
 layer_state_t layer_state_set_user(layer_state_t state) {
-
     planck_ez_left_led_off();
     planck_ez_right_led_off();
 
@@ -178,11 +173,9 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             planck_ez_right_led_on();
             planck_ez_right_led_level(127);
             break;
-	default:
+        default:
             break;
     }
 
     return state;
 };
-
-
