@@ -31,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       SE_COMM, SE_W,    SE_F,    SE_P,    SE_B,   _______,  _______,   SE_J,    SE_L,    SE_U,    SE_Y,    SE_DOT,
       SE_A,    SE_R,    SE_S,    SE_T,    SE_G,   _______,  _______,   SE_M,    SE_N,    SE_E,    SE_I,    SE_O, //REPEAT rem.
       SE_SLSH, SE_X,    SE_C,    SE_D,    SE_V,   _______,  _______,   SE_K,    SE_H,    SE_LPRN, SE_RPRN, SE_UNDS,
-      _______, _______, _______, _______, MT_SPC, _______,             R_THMB, _______, _______, _______, _______
+      _______, _______, _______, L_THMB_R, L_THMB_L, _______,             R_THMB_R, R_THMB_L, _______, _______, _______
     ),
     [_SWE]  = LAYOUT_planck_1x2uC(
       _______, _______, _______, _______, _______, _______,  _______,  _______, _______, _______, _______, _______,
@@ -41,55 +41,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_NAV]  = LAYOUT_planck_1x2uC(
       xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,  _______,  _______,  xxxxxxx, G(SE_W), G(SE_E), G(SE_R), xxxxxxx,
-      xxxxxxx, xxxxxxx, DN_CTRL, xxxxxxx, xxxxxxx,  _______,  _______,  xxxxxxx, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT,
+      xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,  _______,  _______,  xxxxxxx, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT,
       xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,  _______,  _______,  xxxxxxx, KC_HOME, KC_PGUP, KC_END,   KC_END,
       _______, _______, _______, _______, _______,  _______,            _______,    _______, _______, _______, _______
     ),
     [_WNAV] = LAYOUT_planck_1x2uC(
       G(SE_Q), G(SE_COMM), G(SE_DOT), G(SE_P), xxxxxxx,   _______, _______, G(SE_J), G(SE_7),   G(SE_8), G(SE_9), xxxxxxx,
-      G(SE_W), G(SE_E),    G(SE_R),   G(SE_T), xxxxxxx,   _______, _______, G(SE_H), G(SE_4),   G(SE_5), G(SE_6), G(SE_L),
-      xxxxxxx, G(SE_C),    xxxxxxx, xxxxxxx,   xxxxxxx,   _______, _______, G(SE_K), G(SE_1),   G(SE_2), G(SE_3), xxxxxxx,
-      _______, _______,    _______, _______,   G(KC_SPC), _______,          G(KC_M), G(KC_ENT), _______, _______, _______
+      G(SE_T), G(SE_W),    G(SE_E),   G(SE_R), xxxxxxx,   _______, _______, G(SE_H), G(SE_4),   G(SE_5), G(SE_6), G(SE_L),
+      xxxxxxx, G(SE_C),    xxxxxxx,   xxxxxxx,   xxxxxxx,   _______, _______, G(SE_K), G(SE_1),   G(SE_2), G(SE_3), xxxxxxx,
+      _______, _______,    _______,   _______,   G(KC_SPC), _______,          G(KC_M), G(KC_ENT), _______, _______, _______
     ),
     // Important that the symbols on the base layer have the same positions as these symbols
     [_SYM]  = LAYOUT_planck_1x2uC(
-      TILD,    SE_PLUS, SE_ASTR, SE_EXLM,    CIRC,  _______,  _______,   _______, SE_7,    SE_8,    SE_9,    _______,
-      SE_PIPE, SE_LCBR, SE_RCBR, SE_MINS, SE_BSLS,  _______,  _______,   _______, SE_4,    SE_5,    SE_6,    _______,
-      SE_QUES, SE_LABK, SE_RABK, SE_PERC,     GRV,  _______,  _______,   _______, SE_1,    SE_2,    SE_3,    _______,
-      _______, _______, _______, _______, _______,  _______,             SE_0,    _______, _______, _______, _______
+      TILD,    SE_PLUS, SE_ASTR, SE_EXLM,    CIRC,  _______,  _______,   _______,    SE_7,    SE_8,    SE_9,  _______,
+      SE_PIPE, SE_LCBR, SE_RCBR, SE_MINS, SE_BSLS,  _______,  _______,      AT_E,    SE_4,    SE_5,    SE_6,  _______,
+      SE_QUES, SE_LABK, SE_RABK, SE_PERC,     GRV,  _______,  _______,     SE_AT,    SE_1,    SE_2,    SE_3,  _______,
+      _______, _______, _______, _______, _______,  _______,                SE_0, _______, _______, _______,  _______
     ),
-    [_MODS] = LAYOUT_planck_1x2uC(
-      _______, _______, _______, _______, _______,  _______,  _______,   xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,
-      _______, _______, _______, _______, _______,  _______,  _______,   xxxxxxx, OS_GUI,  OS_CTRL, OS_SHFT, OS_ALT,
-      _______, _______, _______, _______, _______,  _______,  _______,   xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, MY_RALT,
-      _______, _______, _______, _______, _______,  _______,             _______, _______, _______, _______, _______
-    ),
-    [_SHRT] = LAYOUT_planck_1x2uC(
-      C(SE_Q), C(SE_W), C(SE_E), C(SE_R), C(SE_T),  _______,  _______,  _______, _______, _______, _______, _______,
-      C(SE_A), C(SE_S), C(SE_D), C(SE_F), C(SE_G),  _______,  _______,  _______, _______, _______, _______, _______,
-      C(SE_Z), C(SE_X), C(SE_C), C(SE_V), C(SE_B),  _______,  _______,  _______, _______, _______, _______, _______,
-      _______, _______, _______, _______, _______,  _______,            _______, FUN,     _______, _______, _______
-    ),
-    /*
-    [_SHRT] = LAYOUT(
-      C(SE_A), C(SE_C), C(SE_W), C(SE_F), C(SE_E),      _______, _______, _______, _______, _______,
-      C(SE_R), C(SE_S), C(SE_T), C(SE_H), xxxxxxx,      _______, _______, _______, _______, _______,
-      C(SE_X), C(SE_V), C(SE_G), C(SE_D), C(SE_B),      _______, _______, _______, _______, _______,
-                                 _______, _______,      _______, FUN
-    ),
-    */
-    [_FUN]  = LAYOUT_planck_1x2uC(
-      xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,   _______,  _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,
-      KC_F6,   KC_F4,   KC_F10,  KC_F2,   KC_F12,    _______,  _______, KC_F11,  KC_F3,   KC_F1,   KC_F5,   KC_F7,
-      xxxxxxx, xxxxxxx, xxxxxxx, KC_F8,   xxxxxxx,   _______,  _______, xxxxxxx, KC_F9,   xxxxxxx, xxxxxxx, xxxxxxx,
-      _______, _______, _______, _______, _______,   _______,           _______, _______, _______, _______, _______
-    ),
-    [_SPEC] = LAYOUT_planck_1x2uC(
-      SE_TILD, SYM_LQO, _______, SYM_RQO, _______,   _______,  _______, _______, _______, _______, SE_CIRC, SE_DIAE,
-      _______, SYM_LDQ, _______, SYM_RDQ, SE_ACUT,   _______,  _______, SE_GRV,  SYM_LFT, SYM_DWN, SYM_UP,  SYM_RHT,
-      _______, _______, _______, _______, _______,   _______,  _______, _______, _______, _______, _______, _______,
-      _______, _______, _______, FUN,     _______,   _______,           _______, _______, _______, _______, _______
-    )
 };
 // clang-format on
 
