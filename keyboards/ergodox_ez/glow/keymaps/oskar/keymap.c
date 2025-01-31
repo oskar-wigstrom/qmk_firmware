@@ -65,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_WNAV] = LAYOUT_ergodox_pretty(
   _______, G(SE_1), G(SE_2),    G(SE_3),   G(SE_4), G(SE_5), _______,         _______, G(SE_6), G(SE_7), G(SE_8), G(SE_9), _______, _______,
   _______, G(SE_Q), G(SE_COMM), G(SE_DOT), G(SE_P), xxxxxxx,_______,          _______, G(SE_J), G(SE_7), G(SE_8), G(SE_9), xxxxxxx, _______,
-  _______, G(SE_W), G(SE_E),    G(SE_R),   G(SE_T), xxxxxxx,                           G(SE_H), G(SE_4), G(SE_5), G(SE_6), G(SE_L), _______,
+  _______, G(SE_T), G(SE_W),    G(SE_E),   G(SE_R),   xxxxxxx,                           G(SE_H), G(SE_4), G(SE_5), G(SE_6), G(SE_L), _______,
   _______, xxxxxxx, G(SE_C),    xxxxxxx,   xxxxxxx, xxxxxxx, _______,         _______, G(SE_K), G(SE_1), G(SE_2), G(SE_3), xxxxxxx, _______,
   _______, _______, _______,    _______,   _______,                                             _______, _______, _______, _______, _______,
   					            _______,   _______,                           _______, _______,
