@@ -49,14 +49,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       G(SE_Q), G(SE_COMM), G(SE_DOT), G(SE_P), xxxxxxx,   _______, _______, G(SE_J), G(SE_7),   G(SE_8), G(SE_9), xxxxxxx,
       G(SE_T), G(SE_W),    G(SE_E),   G(SE_R), xxxxxxx,   _______, _______, G(SE_H), G(SE_4),   G(SE_5), G(SE_6), G(SE_L),
       xxxxxxx, G(SE_C),    xxxxxxx,   xxxxxxx,   xxxxxxx,   _______, _______, G(SE_K), G(SE_1),   G(SE_2), G(SE_3), xxxxxxx,
-      _______, _______,    _______,   _______,   G(KC_SPC), _______,          G(KC_M), G(KC_ENT), _______, _______, _______
+      _______, _______,    _______,   G(KC_SPC),   _______, _______,          G(KC_M), G(KC_ENT), _______, _______, _______
     ),
     // Important that the symbols on the base layer have the same positions as these symbols
     [_SYM]  = LAYOUT_planck_1x2uC(
       TILD,    SE_PLUS, SE_ASTR, SE_EXLM,    CIRC,  _______,  _______,   _______,    SE_7,    SE_8,    SE_9,  _______,
       SE_PIPE, SE_LCBR, SE_RCBR, SE_MINS, SE_BSLS,  _______,  _______,      AT_E,    SE_4,    SE_5,    SE_6,  _______,
       SE_QUES, SE_LABK, SE_RABK, SE_PERC,     GRV,  _______,  _______,     SE_AT,    SE_1,    SE_2,    SE_3,  _______,
-      _______, _______, _______, _______, _______,  _______,                SE_0, _______, _______, _______,  _______
+      _______, _______, _______, _______, _______,  _______,                _______, SE_0, _______, _______,  _______
     ),
 };
 // clang-format on
