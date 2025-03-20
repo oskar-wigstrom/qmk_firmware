@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <stdint.h>
 #include QMK_KEYBOARD_H
 #include "keycodes.h"
 
@@ -125,6 +126,16 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
             return false;
         default:
             return true;
+    }
+}
+
+void set_led(uint8_t id, bool on) {
+    if (id == 0) {
+        planck_ez_left_led(on);
+        planck_ez_left_led_level(127);
+    } else if (id == 1) {
+        planck_ez_right_led(on);
+        planck_ez_right_led_level(127);
     }
 }
 
