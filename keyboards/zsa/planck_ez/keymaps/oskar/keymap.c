@@ -31,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       SE_COMM, SE_W,    SE_F,    SE_P,    SE_B,   _______,  _______,   SE_J,    SE_L,    SE_U,    SE_Y,    SE_DOT,
       SE_A,    SE_R,    SE_S,    SE_T,    SE_G,   _______,  _______,   SE_M,    SE_N,    SE_E,    SE_I,    SE_O, //REPEAT rem.
       SE_SLSH, SE_X,    SE_C,    SE_D,    SE_V,   _______,  _______,   SE_K,    SE_H,    SE_LPRN, SE_RPRN, SE_UNDS,
-      _______, _______, _______, L_THMB_R, L_THMB_L, _______,             R_THMB_R, R_THMB_L, _______, _______, _______
+      _______, _______, ESC_SYM, L_THMB_L, L_THMB_R, _______,             R_THMB_L, R_THMB_R, KC_BSPC, _______, _______
     ),
     [_SWE]  = LAYOUT_planck_1x2uC(
       _______, _______, _______, _______, _______, _______,  _______,  _______, _______, _______, _______, _______,
