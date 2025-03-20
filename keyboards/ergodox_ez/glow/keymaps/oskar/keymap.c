@@ -1,7 +1,9 @@
+#include <stdint.h>
 #include QMK_KEYBOARD_H
 #include "version.h"
 
 #include "keycodes.h"
+#include "leader.h"
 
 #include "g/keymap_combo.h"
 
@@ -150,6 +152,28 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
             return false;
         default:
             return true;
+    }
+}
+
+void set_led(uint8_t id, bool on) {
+    if (id == 0) {
+        if (on) {
+            ergodox_right_led_1_on();
+        } else {
+            ergodox_right_led_1_off();
+        }
+    } else if (id == 1) {
+        if (on) {
+            ergodox_right_led_2_on();
+        } else {
+            ergodox_right_led_2_off();
+        }
+    } else if (id == 2) {
+        if (on) {
+            ergodox_right_led_3_on();
+        } else {
+            ergodox_right_led_3_off();
+        }
     }
 }
 

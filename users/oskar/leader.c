@@ -15,6 +15,7 @@
  */
 
 #include "leader.h"
+#include "status.h"
 
 #include <string.h>
 
@@ -24,45 +25,6 @@
 
 static bool          leading     = false;
 static leader_func_t leader_func = NULL;
-
-#ifdef LEADER_DISPLAY_STR
-
-#    ifndef LEADER_DISPLAY_LEN
-#        define LEADER_DISPLAY_LEN 19
-#    endif
-
-static const char keycode_to_ascii_lut[58] = {0, 0, 0, 0, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 0, 0, 0, '\t', ' ', '-', '=', '[', ']', '\\', 0, ';', '\'', '`', ',', '.', '/'};
-
-static uint8_t    leader_display_size;
-static const char space_ascii[] = "SPC";
-static char       leader_display[LEADER_DISPLAY_LEN + 1]; // add space for null terminator
-
-static void update_leader_display(uint16_t keycode) {
-    leader_display[leader_display_size] = ' ';
-    ++leader_display_size;
-    if (leader_display_size < LEADER_DISPLAY_LEN) {
-        switch (keycode) {
-            case KC_SPC:
-                memcpy(leader_display + leader_display_size, space_ascii, sizeof(space_ascii));
-                leader_display_size += sizeof(space_ascii);
-                break;
-            default:
-                if (keycode < sizeof(keycode_to_ascii_lut)) {
-                    leader_display[leader_display_size] = keycode_to_ascii_lut[keycode];
-                } else {
-                    leader_display[leader_display_size] = '?';
-                }
-                ++leader_display_size;
-                break;
-        }
-        leader_display[leader_display_size] = '-';
-    }
-}
-
-char *leader_display_str(void) {
-    return leader_display;
-}
-#endif
 
 // The entry point for leader sequenc functions
 __attribute__((weak)) void *leader_start_func(uint16_t keycode) {
@@ -77,22 +39,13 @@ bool is_leading(void) {
 void start_leading(void) {
     leading     = true;
     leader_func = leader_start_func;
-#ifdef LEADER_DISPLAY_STR
-    memset(leader_display, 0, sizeof(leader_display));
-    leader_display[0]   = 'L';
-    leader_display[1]   = 'D';
-    leader_display[2]   = 'R';
-    leader_display[3]   = '-';
-    leader_display_size = 3;
-#endif
+    set_led(0, true);
 }
 // Stop leader sequence
 void stop_leading(void) {
     leading     = false;
     leader_func = NULL;
-#ifdef LEADER_DISPLAY_STR
-    leader_display[leader_display_size] = ' ';
-#endif
+    set_led(0, false);
 }
 
 // Process keycode for leader sequences

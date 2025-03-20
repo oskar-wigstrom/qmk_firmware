@@ -39,7 +39,7 @@ COMB(shift_combo_l,     KC_LSFT,        SE_D, SE_V)
 COMB(shift_combo_r,     KC_RSFT,        SE_K, SE_H)
 COMB(gui_combo_r,       OS_WNAV,        SE_H, SE_LPRN)
 COMB(dlr,               SE_DLR,         SE_LPRN, SE_RPRN)
-// COMB(leader,            LEADER,         SE_H, SE_RPRN)       // *******
+COMB(leader,            LEADER,         SE_P, SE_L)
 COMB(swe,               TG_SWE,         SE_H, SE_LPRN, SE_RPRN)
 
 // Mixed home row + other
