@@ -25,11 +25,16 @@ MAGIC_ENABLE = no
 SPACE_CADET_ENABLE = no
 GRAVE_ESC_ENABLE = no
 
+# Homerow mods
+DEFERRED_EXEC_ENABLE = yes
+
 SRC += oneshot.c
+SRC += oneshot_user.c
 SRC += layermodes.c
 SRC += casemodes.c
+SRC += casemodes_user.c
 SRC += tap_hold.c
-SRC += repeat.c
-SRC += roll.c
+SRC += tap_hold_user.c
 SRC += leader.c
+SRC += leader_user.c
 SRC += utils.c

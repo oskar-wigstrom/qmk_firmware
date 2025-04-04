@@ -23,13 +23,11 @@
 
 // Home-row mods: https://precondition.github.io/home-row-mods#tap-hold-configuration-settings
 // Configure the global tapping term (default: 200ms)
-#define TAPPING_TERM_PER_KEY
-#ifdef TAPPING_TERM_PER_KEY
-#    define TAPPING_TERM 200
-#else
-// Only for thumbs
-#    define TAPPING_TERM 250
-#endif
+#define TAPPING_TERM 200
+#define SMTD_GLOBAL_TAP_TERM TAPPING_TERM
+#define SMTD_GLOBAL_FOLLOWING_TAP_TERM TAPPING_TERM
+#define SMTD_GLOBAL_SEQUENCE_TERM TAPPING_TERM / 2
+#define SMTD_GLOBAL_RELEASE_TERM TAPPING_TERM / 6
 
 // Prevent normal rollover on alphas from accidentally triggering mods.
 // Now the default behavior!
@@ -65,3 +63,5 @@
 // These are a bit iffy, as I don't know what they're doing, but it "works fine" according to Discord people
 // #undef LOCKING_SUPPORT_ENABLE
 // #undef LOCKING_RESYNC_ENABLE
+
+#define MAX_DEFERRED_EXECUTORS 10

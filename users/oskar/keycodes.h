@@ -44,44 +44,39 @@ enum custom_keycodes {
 
     TG_SWE,
 
-    // Instant leader key
-    LEADER,
-
     // Repeat keys
     REPEAT,
     REV_REP,
 
     //
     AT_E,
-    QE
+    QE,
+
+    // Homerow mods
+    SMTD_KEYCODES_BEGIN,
+    HR_A,
+    HR_R,
+    HR_S,
+    HR_T,
+    HR_N,
+    HR_E,
+    HR_I,
+    HR_O,
+    LEADER_SYM,
+    SMTD_KEYCODES_END,
 };
 
 #define xxxxxxx KC_NO
 
-#define TG_NAV TG(_NAV)
-#define TO_BASE TO(_BASE)
-
 #define L_THMB_L LT(_NAV, KC_SPC)
-#define L_THMB_R KC_TAB
-#define R_THMB_L OS_SHFT
+#define L_THMB_R LT(_SYM, KC_TAB)
+#define R_THMB_L LEADER_SYM
 #define R_THMB_R KC_ENT
 
-#define MY_RALT OSM(MOD_RALT)
-
-#define ESC_SYM LT(_SYM, KC_ESC)
 #define COLN_SYM LT(_SYM, SE_COLN)
-
-#define TAB_MOD LT(_MODS, KC_TAB)
-
-#define MY_LALT OSM(MOD_LALT)
 
 #define NUM OSL(_NUM)
 #define OS_WNAV OSL(_WNAV)
 #define OPT OSL(_OPT)
 #define SPEC OSL(_SPEC)
 #define FUN OSL(_FUN)
-
-#define SYM_LDQ ALGR(SE_V)    // “ v
-#define SYM_RDQ ALGR(SE_B)    // ” b
-#define SYM_LQO ALGR(S(SE_V)) // ‘ V
-#define SYM_RQO ALGR(S(SE_B)) // ’ B

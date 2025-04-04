@@ -5,4 +5,3 @@
 void set_led(uint8_t id, bool on);
 bool is_caps_swapped(void);
 bool in_linux(void);
-

@@ -39,13 +39,11 @@ bool is_leading(void) {
 void start_leading(void) {
     leading     = true;
     leader_func = leader_start_func;
-    set_led(0, true);
 }
 // Stop leader sequence
 void stop_leading(void) {
     leading     = false;
     leader_func = NULL;
-    set_led(0, false);
 }
 
 // Process keycode for leader sequences

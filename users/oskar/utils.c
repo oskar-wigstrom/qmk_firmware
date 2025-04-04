@@ -1,15 +1,13 @@
-#include <stdint.h>
 #include "quantum.h"
 
+#include "sm_td.h"
 #include "keycodes.h"
-#include "status.h"
 #include "oneshot.h"
+#include "tap_hold.h"
 #include "casemodes.h"
 #include "layermodes.h"
-#include "tap_hold.h"
-#include "repeat.h"
-#include "roll.h"
 #include "leader.h"
+#include "sm_td.h"
 
 #include "keymap_swedish.h"
 #include "sendstring_swedish.h"
@@ -22,11 +20,6 @@
 
 static uint16_t last_key_down = KC_NO;
 static uint16_t last_key_up   = KC_NO;
-
-static bool linux_mode = true;
-bool        in_linux(void) {
-    return linux_mode;
-}
 
 static bool swap_caps_escape = false;
 bool        is_caps_swapped(void) {
@@ -41,20 +34,8 @@ bool tap_undead_key(bool key_down, uint16_t code) {
     return false;
 }
 
-void tap16_repeatable(uint16_t keycode) {
-    tap_code16(keycode);
-    register_key_to_repeat(keycode);
-}
-
 void swap_caps_esc(void) {
     swap_caps_escape = !swap_caps_escape;
-#ifdef OLED_DRIVER_ENABLE
-    oled_on();
-#endif
-}
-
-void tg_nix(void) {
-    linux_mode = !linux_mode;
 #ifdef OLED_DRIVER_ENABLE
     oled_on();
 #endif
@@ -92,14 +73,6 @@ void tap_caps_lock(void) {
     tap_code(swap_caps_escape ? KC_ESC : KC_CAPS);
 }
 
-void tap_space_shift(uint16_t key, bool key_down) {
-    if (key_down) {
-        tap_code16(key);
-        tap_code(KC_SPC);
-        set_oneshot_mods(MOD_BIT(KC_LSFT));
-    }
-}
-
 void double_tap(uint16_t keycode) {
     tap_code16(keycode);
     tap_code16(keycode);
@@ -109,25 +82,6 @@ void double_tap_space(uint16_t keycode) {
     tap_code16(KC_SPC);
     double_tap(keycode);
     tap_code16(KC_SPC);
-}
-
-uint16_t corresponding_swe_key(uint16_t keycode) {
-    switch (keycode) {
-        case SE_LPRN:
-            return SE_ARNG;
-        case SE_ARNG:
-            return SE_LPRN;
-        case SE_RPRN:
-            return SE_ADIA;
-        case SE_ADIA:
-            return SE_RPRN;
-        case SE_UNDS:
-            return SE_ODIA;
-        case SE_ODIA:
-            return SE_UNDS;
-        default:
-            return KC_NO;
-    }
 }
 
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo) {
@@ -155,42 +109,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 }
 #endif
 
-// Case modes
-
-bool terminate_case_modes(uint16_t keycode, const keyrecord_t *record) {
-    switch (keycode) {
-        // Keycodes to ignore (don't disable caps word)
-        case REPEAT:
-        case REV_REP:
-            return false;
-        case SE_A ... SE_Z:
-        case SE_1 ... SE_0:
-        case SE_ARNG:
-        case SE_ADIA:
-        case SE_ODIA:
-        case SE_MINS:
-        case SE_UNDS:
-        case KC_BSPC:
-            // If mod chording disable the mods
-            if (record->event.pressed && (get_mods() != 0)) {
-                return true;
-            }
-            break;
-        default:
-            if (record->event.pressed) {
-                return true;
-            }
-            break;
-    }
-    return false;
-}
-
-void triple_tap(uint16_t keycode) {
-    tap_code16(keycode);
-    tap_code16(keycode);
-    tap_code16(keycode);
-}
-
 void double_parens_left(uint16_t left, uint16_t right) {
     tap_code16(left);
     tap_code16(right);
@@ -217,7 +135,6 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
         case OS_GUI:
         case SPLIT_VS:
         case SPLIT:
-        case TAB_MOD:
             return true;
         default:
             return false;
@@ -243,276 +160,48 @@ void process_oneshot_post(uint16_t keycode, keyrecord_t *record) {
     update_oneshot_post(&os_gui_state, KC_LGUI, OS_GUI, keycode, record);
 }
 
-// Tap hold
-bool tap_hold(uint16_t keycode) {
+void on_smtd_action(uint16_t keycode, smtd_action action, uint8_t tap_count) {
     switch (keycode) {
-        case SE_DQUO:
-        case SE_QUOT:
-        case SE_LABK:
-        case SE_RABK:
-        case SE_PERC:
-        case GRV:
-        case AT_E:
-        case QE:
-            //        case SE_AT:
-        case SE_PIPE:
-        case SE_EXLM:
-        case SE_AMPR:
-        case SE_QUES:
-        case SE_HASH:
-        case SE_LPRN:
-        case SE_RPRN:
-        case SE_LCBR:
-        case SE_LBRC:
-        case SE_EQL:
-            //        case SE_1:
-            //        case SE_2:
-            //        case SE_3:
-            //        case SE_4:
-            //        case SE_5:
-            //        case SE_6:
-            //        case SE_7:
-            //        case SE_8:
-            //        case SE_9:
-            //        case SE_0:
-        case G(SE_0):
-        case G(SE_1):
-        case G(SE_2):
-        case G(SE_3):
-        case G(SE_4):
-        case G(SE_5):
-        case G(SE_6):
-        case G(SE_7):
-        case G(SE_8):
-        case G(SE_9):
-        case G(SE_K):
-        case G(SE_J):
-        case G(SE_W):
-        case G(SE_E):
-        case G(SE_R):
-        case G(SE_C):
-        case G(SE_P):
-        case G(KC_SPC):
-        case G(KC_ENT):
-            //        case SE_A ... SE_Z:
-        case SE_ARNG:
-        case SE_ADIA:
-        case SE_ODIA:
-        case E_ACUT:
-        case CLOSE_WIN:
-        case C(SE_A):
-        case C(SE_C):
-        case C(SE_W):
-        case C(SE_F):
-        case C(SE_E):
-        case C(SE_R):
-        case C(SE_S):
-        case C(SE_T):
-        case C(SE_H):
-        case C(SE_X):
-        case C(SE_V):
-        case C(SE_G):
-        case C(SE_D):
-        case C(SE_B):
-        case SPLIT:
-        case SPLIT_VS:
-        case KC_ENT:
-            return true;
-        default:
-            return false;
+        SMTD_MT(HR_A, KC_A, KC_LEFT_ALT)
+        SMTD_MT(HR_R, KC_R, KC_LEFT_GUI)
+        SMTD_MT(HR_S, KC_S, KC_LEFT_CTRL)
+        SMTD_MT(HR_T, KC_T, KC_LEFT_SHIFT)
+
+        SMTD_MT(HR_O, KC_O, KC_LEFT_ALT)
+        SMTD_MT(HR_I, KC_I, KC_RIGHT_GUI)
+        SMTD_MT(HR_E, KC_E, KC_RIGHT_CTRL)
+        SMTD_MT(HR_N, KC_N, KC_RIGHT_SHIFT)
+
+        case LEADER_SYM:
+            if (action == SMTD_ACTION_TAP) {
+                start_leading();
+            } else if (action == SMTD_ACTION_HOLD) {
+                layer_move(_SYM);
+            } else if (action == SMTD_ACTION_RELEASE) {
+                layer_move(_BASE);
+            }
+            break;
     }
 }
-
-void tap_hold_send_tap(uint16_t keycode) {
-    switch (keycode) {
-        case GRV:
-            register_key_to_repeat(keycode);
-            tap_undead_key(true, SE_GRV);
-            return;
-        case E_ACUT:
-            tap_code16(SE_ACUT);
-            tap_code16(SE_E);
-            return;
-        case CLOSE_WIN:
-            tap_code16(C(SE_W));
-            tap_code(SE_Q);
-            /* tap_escape(); */
-            /* tap_code16(SE_COLN); */
-            /* tap_code(SE_Q); */
-            /* tap_code(KC_ENT); */
-            return;
-        case SPLIT:
-            tap_code16(C(SE_W));
-            tap_code(SE_S);
-            return;
-        case SPLIT_VS:
-            tap_code16(C(SE_W));
-            tap_code(SE_V);
-            return;
-        case AT_E:
-            send_string("@e");
-            return;
-        case QE:
-            send_string("qe");
-            return;
-        default:
-            tap16_repeatable(keycode);
-    }
-}
-
-void tap_hold_send_hold(uint16_t keycode) {
-    disable_caps_word();
-
-    switch (keycode) {
-        case SE_SLSH:
-        case SE_LABK:
-        case SE_RABK:
-            // FIXME should be repeatable
-            double_tap(keycode);
-            return;
-        case SE_DQUO:
-        case SE_0:
-            triple_tap(keycode); // Can be changed
-            return;
-        case GRV:
-            tap_undead_key(true, SE_GRV);
-            tap_undead_key(true, SE_GRV);
-            tap_undead_key(true, SE_GRV);
-            return;
-        case SE_PIPE:
-        case SE_AMPR:
-        case SE_EQL:
-            double_tap_space(keycode);
-            return;
-        case SE_UNDS:
-            tap_code16(SE_MINS);
-            return;
-        case SE_DOT:
-            tap_code16(SE_COMM);
-            return;
-        case SE_LPRN:
-            tap_code16(SE_LBRC);
-            return;
-        case SE_RPRN:
-            tap_code16(SE_RBRC);
-            return;
-        case E_ACUT:
-            tap_code16(SE_ACUT);
-            tap_code16(S(SE_E));
-            return;
-        case CLOSE_WIN:
-            tap16_repeatable(S(G(SE_C)));
-            return;
-        case SPLIT:
-            tap_code16(C(SE_B));
-            send_string("\"");
-            return;
-        case SPLIT_VS:
-            tap_code16(C(SE_B));
-            send_string("%");
-            return;
-        default:
-            tap16_repeatable(S(keycode));
-    }
-}
-
-uint16_t tap_hold_timeout(uint16_t keycode) {
-    switch (keycode) {
-        // Extra
-        case CLOSE_WIN:
-            return 180;
-        // Thumb
-        // No key here.
-        // Pinky
-        case SE_Q:
-        case SE_A:
-        case SE_Z:
-        case SE_DOT:
-        case SE_O:
-        case SE_UNDS:
-        case SE_ODIA:
-            return 135;
-        // Ring
-        case SE_W:
-        case SE_R:
-        case SE_X:
-        case SE_Y:
-        case SE_I:
-        case SE_RPRN:
-        case SE_ADIA:
-        case C(SE_9):
-        case C(SE_6):
-        case C(SE_3):
-            return 115;
-        // Middle
-        case SE_F:
-        case SE_S:
-        case SE_C:
-        case SE_U:
-        case SE_E:
-        case SE_LPRN:
-        case SE_ARNG:
-        case SE_8:
-        case SE_5:
-        case SE_2:
-            return 110;
-        // Slow index
-        // Non here at the moment
-        // Index
-        default:
-            return 110;
-    }
-}
-
-// https://github.com/andrewjrae/kyria-keymap#userspace-leader-sequences
-void *leader_toggles_func(uint16_t keycode) {
-    switch (keycode) {
-        case KC_N:
-            layer_invert(_NUM);
-            return NULL;
-        case KC_S:
-            layer_invert(_SYM);
-            return NULL;
-        case KC_C:
-            swap_caps_esc();
-            return NULL;
-        default:
-            return NULL;
-    }
-}
-
-void *leader_start_func(uint16_t keycode) {
-    switch (keycode) {
-        case KC_T:
-            return leader_toggles_func;
-        case KC_C:
-            tap_caps_lock();
-            return NULL;
-        case ESC_SYM:
-            tap_code16(C(S(KC_ESC)));
-            return NULL;
-        default:
-            return NULL;
-    }
-}
-
 bool _process_record_user(uint16_t keycode, keyrecord_t *record) {
-    // Error: Too many arguments for format. Meh!
-    // #ifdef CONSOLE_ENABLE
-    //     if (record->event.pressed) {
-    //         uprintf("0x%04X,%u,%u,%u,%b,0x%02X,0x%02X,%u\n",
-    //              keycode,
-    //              record->event.key.row,
-    //              record->event.key.col,
-    //              get_highest_layer(layer_state),
-    //              record->event.pressed,
-    //              get_mods(),
-    //              get_oneshot_mods(),
-    //              record->tap.count
-    //              );
-    //     }
-    // #endif
+#if !defined(IS_ERGODOX) && !defined(IS_PLANCK)
+#    error "This code is only for Ergodox or Planck keyboards"
+#endif
 
+    // Debugging
+#ifdef CONSOLE_ENABLE
+    if (record->event.pressed) {
+#    if defined(IS_ERGODOX)
+        uprintf("E0x%04X,%u,%u,%u,%b,0x%02X,0x%02X,%u\n", keycode, record->event.key.row, record->event.key.col, get_highest_layer(layer_state), record->event.pressed, get_mods(), get_oneshot_mods(), record->tap.count);
+#    elif defined(IS_PLANCK)
+        uprintf("P0x%04X,%u,%u,%u,%b,0x%02X,0x%02X,%u\n", keycode, record->event.key.row, record->event.key.col, get_highest_layer(layer_state), record->event.pressed, get_mods(), get_oneshot_mods(), record->tap.count);
+#    endif
+    }
+#endif
+
+    if (!process_smtd(keycode, record)) {
+        return false;
+    }
     if (!process_leader(keycode, record)) {
         return false;
     }
@@ -522,25 +211,11 @@ bool _process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_case_modes(keycode, record)) {
         return false;
     }
-    if (!process_roll(keycode, record)) {
-        return false;
-    }
     if (!process_tap_hold(keycode, record)) {
-        // Extra register here to allow fast rolls without waiting for tap hold,
-        // (which will also overwrite this).
-        if (record->event.pressed) {
-            register_key_to_repeat(keycode);
-        }
         return false;
     }
 
     switch (keycode) {
-        case ESC_SYM:
-            if (record->tap.count && record->event.pressed) {
-                tap_escape();
-                return false;
-            }
-            break;
         case KC_CAPS:
             return process_caps(record->event.pressed);
         case CLEAR:
@@ -560,10 +235,8 @@ bool _process_record_user(uint16_t keycode, keyrecord_t *record) {
             // disable_gaming();
             return false;
         case TILD:
-            register_key_to_repeat(TILD);
             return tap_undead_key(record->event.pressed, SE_TILD);
         case CIRC:
-            register_key_to_repeat(CIRC);
             return tap_undead_key(record->event.pressed, SE_CIRC);
         case NUMWORD:
             process_num_word_activation(record);
@@ -588,40 +261,24 @@ bool _process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case COLN_SYM:
             if (record->tap.count && record->event.pressed) {
-                tap16_repeatable(SE_COLN);
+                tap_code16(SE_COLN);
                 return false;
             }
             break;
         case KC_ENT:
             if (record->event.pressed) {
                 if (IS_LAYER_ON(_NUM)) {
-                    tap16_repeatable(KC_PENT);
+                    tap_code16(KC_PENT);
                 } else {
-                    tap16_repeatable(KC_ENT);
+                    tap_code16(KC_ENT);
                 }
                 disable_num_word();
             }
             return false;
         case TG_SWE:
             if (record->event.pressed) {
-                uint16_t swe_key = corresponding_swe_key(last_key());
-                if (swe_key != KC_NO) {
-                    tap_code16(KC_BSPC);
-                    tap_code16(swe_key);
-                }
                 layer_invert(_SWE);
             }
-            return false;
-        case LEADER:
-            start_leading();
-            return false;
-        case REPEAT:
-            // Enable fast UI rolls with repeat key
-            end_tap_hold();
-            update_repeat_key(record);
-            return false;
-        case REV_REP:
-            update_reverse_repeat_key(record);
             return false;
     }
 
@@ -635,16 +292,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // Otherwise register keyrepeat here by default.
     bool res = _process_record_user(keycode, record);
 
-    // Space needs some special handling to not interfere with NAV toggling.
-    // Maybe there's a more general way to do this, but I dunno.
-    if (keycode == L_THMB_L) {
-        if (!record->event.pressed && last_key_down == L_THMB_L) {
-            register_key_to_repeat(KC_SPC);
-        }
-    } else if (res && record->event.pressed) {
-        register_key_to_repeat(keycode);
-    }
-
     process_oneshot_post(keycode, record);
 
     if (record->event.pressed) {
@@ -654,8 +301,4 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
     return res;
-}
-
-void matrix_scan_user(void) {
-    tap_hold_matrix_scan();
 }
