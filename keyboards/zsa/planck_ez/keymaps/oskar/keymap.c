@@ -16,9 +16,14 @@
 
 #include <stdint.h>
 #include QMK_KEYBOARD_H
+
 #include "keycodes.h"
 
 #include "g/keymap_combo.h"
+
+#if MAX_DEFERRED_EXECUTORS < 10
+#    error "MAX_DEFERRED_EXECUTORS must be at least 10"
+#endif
 
 #ifdef CONSOLE_ENABLE
 #    include "print.h"
@@ -30,9 +35,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_BASE] = LAYOUT_planck_1x2uC(
       SE_COMM, SE_W,    SE_F,    SE_P,    SE_B,   _______,  _______,   SE_J,    SE_L,    SE_U,    SE_Y,    SE_DOT,
-      SE_A,    SE_R,    SE_S,    SE_T,    SE_G,   _______,  _______,   SE_M,    SE_N,    SE_E,    SE_I,    SE_O, //REPEAT rem.
+      HR_A,    HR_R,    HR_S,    HR_T,    SE_G,   _______,  _______,   SE_M,    HR_N,    HR_E,    HR_I,    HR_O,
       SE_SLSH, SE_X,    SE_C,    SE_D,    SE_V,   _______,  _______,   SE_K,    SE_H,    SE_LPRN, SE_RPRN, SE_UNDS,
-      _______, _______, ESC_SYM, L_THMB_L, L_THMB_R, _______,             R_THMB_L, R_THMB_R, KC_BSPC, _______, _______
+      _______, _______, KC_ESC, L_THMB_L, L_THMB_R, _______,             R_THMB_L, R_THMB_R, KC_BSPC, _______, _______
     ),
     [_SWE]  = LAYOUT_planck_1x2uC(
       _______, _______, _______, _______, _______, _______,  _______,  _______, _______, _______, _______, _______,
@@ -54,9 +59,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     // Important that the symbols on the base layer have the same positions as these symbols
     [_SYM]  = LAYOUT_planck_1x2uC(
-      TILD,    SE_PLUS, SE_ASTR, SE_EXLM,    CIRC,  _______,  _______,   _______,    SE_7,    SE_8,    SE_9,  _______,
-      SE_PIPE, SE_LCBR, SE_RCBR, SE_MINS, SE_BSLS,  _______,  _______,      AT_E,    SE_4,    SE_5,    SE_6,  _______,
-      SE_QUES, SE_LABK, SE_RABK, SE_PERC,     GRV,  _______,  _______,     SE_AT,    SE_1,    SE_2,    SE_3,  _______,
+      TILD,    _______, SE_ASTR, SE_EXLM,    CIRC,  _______,  _______,   _______,    SE_7,    SE_8,    SE_9,  SE_MINS,
+      SE_PIPE, SE_LCBR, SE_RCBR, _______, SE_BSLS,  _______,  _______,      AT_E,    SE_4,    SE_5,    SE_6,  SE_PLUS,
+      SE_QUES, SE_LABK, SE_RABK, SE_PERC,     GRV,  _______,  _______,     SE_AT,    SE_1,    SE_2,    SE_3,  KC_DEL,
       _______, _______, _______, _______, _______,  _______,                _______, SE_0, _______, _______,  _______
     ),
 };
@@ -67,14 +72,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 uint16_t get_combo_term(uint16_t index, combo_t *combo) {
     switch (index) {
             // Home-row and other tight combos
-        case escape_sym:
         case del:
         case dquo:
-        case coln_sym:
         case quot:
         case split:
-        case ctrl_combo_l:
-        case ctrl_combo_r:
         case gui_combo_l:
         case gui_combo_r:
             return COMBO_TERM;
@@ -92,7 +93,6 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
 bool get_combo_must_tap(uint16_t index, combo_t *combo) {
     switch (index) {
         case del:
-        case backsp:
         case comb_perc:
         case comb_grv:
         case comb_pipe:
@@ -110,19 +110,13 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
         case adia:
         case odia:
         case eql:
-        case shift_combo_l:
-        case shift_combo_r:
         case gui_combo_l:
         case gui_combo_r:
-        case ctrl_combo_l:
-        case ctrl_combo_r:
         case close_win:
-        case escape_sym:
         case split_vs:
         case split:
         case coln_sym:
         case dquo:
-        case lalt:
             return false;
         default:
             return true;
@@ -131,10 +125,10 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
 
 void set_led(uint8_t id, bool on) {
     if (id == 0) {
-        planck_ez_left_led(on);
+        planck_ez_left_led_on();
         planck_ez_left_led_level(127);
     } else if (id == 1) {
-        planck_ez_right_led(on);
+        planck_ez_right_led_on();
         planck_ez_right_led_level(127);
     }
 }
