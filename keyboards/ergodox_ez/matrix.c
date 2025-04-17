@@ -18,7 +18,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 /*
  * scan matrix
  */
@@ -34,7 +33,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "debounce.h"
 #include "ergodox_ez.h"
 
-
 /*
  * This constant define not debouncing time in msecs, assuming eager_pr.
  *
@@ -48,8 +46,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /* matrix state(1:on, 0:off) */
-extern matrix_row_t matrix[MATRIX_ROWS];      // debounced values
-extern matrix_row_t raw_matrix[MATRIX_ROWS];  // raw values
+extern matrix_row_t matrix[MATRIX_ROWS];     // debounced values
+extern matrix_row_t raw_matrix[MATRIX_ROWS]; // raw values
 
 static matrix_row_t read_cols(uint8_t row);
 static void         init_cols(void);
@@ -79,7 +77,7 @@ static inline bool store_raw_matrix_row(uint8_t index) {
 }
 
 bool matrix_scan_custom(matrix_row_t current_matrix[]) {
-    if (mcp23018_status) {  // if there was an error
+    if (mcp23018_status) { // if there was an error
         if (++mcp23018_reset_loop == 0) {
             print("trying to reset mcp23018\n");
             mcp23018_status = init_mcp23018();
@@ -89,7 +87,7 @@ bool matrix_scan_custom(matrix_row_t current_matrix[]) {
                 print("left side attached\n");
                 ergodox_blink_all_leds();
 #ifdef RGB_MATRIX_ENABLE
-                rgb_matrix_init();  // re-init driver on reconnect
+                rgb_matrix_init(); // re-init driver on reconnect
 #endif
             }
         }
@@ -97,7 +95,7 @@ bool matrix_scan_custom(matrix_row_t current_matrix[]) {
 
 #ifdef LEFT_LEDS
     mcp23018_status = ergodox_left_leds_update();
-#endif  // LEFT_LEDS
+#endif // LEFT_LEDS
     bool changed = false;
     for (uint8_t i = 0; i < MATRIX_ROWS_PER_SIDE; i++) {
         // select rows from left and right hands
@@ -140,7 +138,7 @@ static void init_cols(void) {
 
 static matrix_row_t read_cols(uint8_t row) {
     if (row < 7) {
-        if (mcp23018_status) {  // if there was an error
+        if (mcp23018_status) { // if there was an error
             return 0;
         } else {
             uint8_t data = 0;
@@ -192,7 +190,7 @@ static void select_row(uint8_t row) {
             // set active row low  : 0
             // set other rows hi-Z : 1
             uint8_t data;
-            data = 0xFF & ~(1 << row);
+            data            = 0xFF & ~(1 << row);
             mcp23018_status = i2c_write_register(I2C_ADDR, GPIOA, &data, 1, ERGODOX_EZ_I2C_TIMEOUT);
         }
     } else {
@@ -240,8 +238,7 @@ void matrix_power_up(void) {
     init_cols();
 
     // initialize matrix state: all keys off
-    for (uint8_t i=0; i < MATRIX_ROWS; i++) {
+    for (uint8_t i = 0; i < MATRIX_ROWS; i++) {
         matrix[i] = 0;
     }
-
 }

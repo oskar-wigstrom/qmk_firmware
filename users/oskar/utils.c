@@ -3,11 +3,11 @@
 #include "sm_td.h"
 #include "keycodes.h"
 #include "oneshot.h"
+#include "leader.h"
 #include "tap_hold.h"
 #include "casemodes.h"
 #include "layermodes.h"
-#include "leader.h"
-#include "sm_td.h"
+#include "status.h"
 
 #include "keymap_swedish.h"
 #include "sendstring_swedish.h"
@@ -89,26 +89,6 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo) {
     return true;
 }
 
-// Tapping terms
-#ifdef TAPPING_TERM_PER_KEY
-
-#    define THUMB_TERM 20
-#    define INDEX_TERM -20
-#    define MIDDLE_TERM 0
-#    define RING_TERM 80
-#    define PINKY_TERM 180
-
-uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case L_THMB_L:
-        case R_THMB_R:
-            return TAPPING_TERM + THUMB_TERM;
-        default:
-            return TAPPING_TERM;
-    }
-}
-#endif
-
 void double_parens_left(uint16_t left, uint16_t right) {
     tap_code16(left);
     tap_code16(right);
@@ -160,6 +140,19 @@ void process_oneshot_post(uint16_t keycode, keyrecord_t *record) {
     update_oneshot_post(&os_gui_state, KC_LGUI, OS_GUI, keycode, record);
 }
 
+void clear(void) {
+    clear_oneshot_mods();
+    if (get_oneshot_layer() != 0) {
+        clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
+    }
+    stop_leading();
+    disable_num_word();
+    disable_caps_word();
+    layer_off(_NUM);
+    layer_off(_SYM);
+    layer_move(_BASE);
+}
+
 void on_smtd_action(uint16_t keycode, smtd_action action, uint8_t tap_count) {
     switch (keycode) {
         SMTD_MT(HR_A, KC_A, KC_LEFT_ALT)
@@ -172,13 +165,15 @@ void on_smtd_action(uint16_t keycode, smtd_action action, uint8_t tap_count) {
         SMTD_MT(HR_E, KC_E, KC_RIGHT_CTRL)
         SMTD_MT(HR_N, KC_N, KC_RIGHT_SHIFT)
 
-        case LEADER_SYM:
+        case LEADER_CANCEL:
             if (action == SMTD_ACTION_TAP) {
-                start_leading();
+                if (is_leading()) {
+                    stop_leading();
+                } else {
+                    start_leading();
+                }
             } else if (action == SMTD_ACTION_HOLD) {
-                layer_move(_SYM);
-            } else if (action == SMTD_ACTION_RELEASE) {
-                layer_move(_BASE);
+                clear();
             }
             break;
     }
@@ -214,25 +209,19 @@ bool _process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_tap_hold(keycode, record)) {
         return false;
     }
+    if (!process_clicky(keycode, record)) {
+        return false;
+    }
 
     switch (keycode) {
         case KC_CAPS:
             return process_caps(record->event.pressed);
         case CLEAR:
-            clear_oneshot_mods();
-            if (get_oneshot_layer() != 0) {
-                clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
-            }
-            stop_leading();
-            layer_off(_NUM);
-            layer_off(_SYM);
-            layer_move(_BASE);
+            clear();
             return false;
-        case CANCEL:
-            layer_off(_NUM);
-            layer_off(_SYM);
-            stop_leading();
-            // disable_gaming();
+        case KC_ESC:
+            clear();
+            tap_escape();
             return false;
         case TILD:
             return tap_undead_key(record->event.pressed, SE_TILD);
@@ -299,6 +288,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     } else {
         last_key_up = keycode;
     }
+    set_led(2, is_leading());
 
     return res;
 }

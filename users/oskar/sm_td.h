@@ -716,7 +716,11 @@ bool process_smtd(uint16_t keycode, keyrecord_t *record) {
             case SMTD_ACTION_TOUCH:                          \
                 break;                                       \
             case SMTD_ACTION_TAP:                            \
-                SMTD_TAP_16(use_cl, tap_key);                \
+                if (is_leading()) {                          \
+                    process_leader_tap(tap_key);             \
+                } else {                                     \
+                    SMTD_TAP_16(use_cl, tap_key);            \
+                }                                            \
                 break;                                       \
             case SMTD_ACTION_HOLD:                           \
                 if (tap_count < threshold) {                 \

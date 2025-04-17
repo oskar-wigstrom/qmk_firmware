@@ -62,16 +62,16 @@ enum custom_keycodes {
     HR_E,
     HR_I,
     HR_O,
-    LEADER_SYM,
+    LEADER_CANCEL,
     SMTD_KEYCODES_END,
 };
 
 #define xxxxxxx KC_NO
 
-#define L_THMB_L LT(_NAV, KC_SPC)
-#define L_THMB_R LT(_SYM, KC_TAB)
-#define R_THMB_L LEADER_SYM
-#define R_THMB_R KC_ENT
+#define L_THMB_L LT(_SYM, KC_SPC)
+#define L_THMB_R LT(_NAV, KC_TAB)
+#define R_THMB_L LEADER_CANCEL
+#define R_THMB_R LT(_SYM, KC_ENT)
 
 #define COLN_SYM LT(_SYM, SE_COLN)
 

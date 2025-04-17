@@ -116,4 +116,6 @@ bool leader_sequence_four_keys(uint16_t kc1, uint16_t kc2, uint16_t kc3, uint16_
  */
 bool leader_sequence_five_keys(uint16_t kc1, uint16_t kc2, uint16_t kc3, uint16_t kc4, uint16_t kc5);
 
+// for debug
+uint16_t *get_leader_sequence(void);
 /** \} */
