@@ -17,6 +17,7 @@
 #include "leader.h"
 #include "status.h"
 
+#include <stdint.h>
 #include <string.h>
 
 #ifndef LEADER_ESC_KEY
@@ -46,22 +47,22 @@ void stop_leading(void) {
     leader_func = NULL;
 }
 
-// Process keycode for leader sequences
-bool process_leader(uint16_t keycode, const keyrecord_t *record) {
-    if (leading && record->event.pressed) {
+bool process_leader_impl(uint16_t keycode, uint16_t tap_count, bool pressed) {
+    if (leading && pressed) {
         // Get the base keycode of a mod or layer tap key
         switch (keycode) {
             case QK_MOD_TAP ... QK_MOD_TAP_MAX:
             case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
             case QK_TAP_DANCE ... QK_TAP_DANCE_MAX:
                 // Earlier return if this has not been considered tapped yet
-                if (record->tap.count == 0) return true;
+                if (tap_count == 0) return true;
                 keycode = keycode & 0xFF;
                 break;
             default:
                 break;
         }
 
+        tap_code16(KC_0);
         // let through anything above that's normal keyboard keycode or a mod
         if (keycode > QK_MODS_MAX || IS_MODIFIER_KEYCODE(keycode)) {
             return true;
@@ -72,9 +73,6 @@ bool process_leader(uint16_t keycode, const keyrecord_t *record) {
             return false;
         }
 
-#ifdef LEADER_DISPLAY_STR
-        update_leader_display(keycode);
-#endif
         // update the leader function
         leader_func = leader_func(keycode);
         if (leader_func == NULL) {
@@ -83,4 +81,13 @@ bool process_leader(uint16_t keycode, const keyrecord_t *record) {
         return false;
     }
     return true;
+}
+
+bool process_leader_tap(uint16_t keycode) {
+    return process_leader_impl(keycode, 1, true);
+}
+
+// Process keycode for leader sequences
+bool process_leader(uint16_t keycode, const keyrecord_t *record) {
+    return process_leader_impl(keycode, record->tap.count, record->event.pressed);
 }

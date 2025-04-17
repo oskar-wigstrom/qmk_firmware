@@ -29,3 +29,5 @@ void stop_leading(void);
 
 // Process keycode for leader sequences
 bool process_leader(uint16_t keycode, const keyrecord_t *record);
+
+bool process_leader_tap(uint16_t keycode);

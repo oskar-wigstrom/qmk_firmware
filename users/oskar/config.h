@@ -52,16 +52,18 @@
 
 // Cannot import "keymap_swedish.h" as it sometimes generates extremely weird errors.
 #define LEADER_ESC_KEY KC_E
+#define LEADER_NO_TIMEOUT
 
 // Not supported without flto
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
-
 // Save space
 // #define LAYER_STATE_8BIT
 #define LAYER_STATE_16BIT
 // These are a bit iffy, as I don't know what they're doing, but it "works fine" according to Discord people
 // #undef LOCKING_SUPPORT_ENABLE
 // #undef LOCKING_RESYNC_ENABLE
+#define AUDIO_ENABLE
+#define AUDIO_CLICKY
 
 #define MAX_DEFERRED_EXECUTORS 10

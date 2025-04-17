@@ -10,3 +10,5 @@ void double_tap_space(uint16_t keycode);
 void swap_caps_esc(void);
 
 void tap_caps_lock(void);
+
+void clear(void);

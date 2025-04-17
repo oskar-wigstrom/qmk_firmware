@@ -8,6 +8,9 @@ VPATH +=  keyboards/gboards/
 # Keylogging
 CONSOLE_ENABLE = yes
 
+
+AUDIO_ENABLE = yes
+
 # Extra features that are nice but takes space
 WPM_ENABLE = no
 EXTRAKEY_ENABLE = no        # For volume keys and similar
@@ -31,10 +34,10 @@ DEFERRED_EXEC_ENABLE = yes
 SRC += oneshot.c
 SRC += oneshot_user.c
 SRC += layermodes.c
+SRC += leader.c
+SRC += leader_user.c
 SRC += casemodes.c
 SRC += casemodes_user.c
 SRC += tap_hold.c
 SRC += tap_hold_user.c
-SRC += leader.c
-SRC += leader_user.c
 SRC += utils.c
