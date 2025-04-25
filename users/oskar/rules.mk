@@ -1,15 +1,12 @@
 COMBO_ENABLE = yes
 RGBLIGHT_ENABLE = no        # Keyboard RGB underglow
-RGB_MATRIX_ENABLE = yes      # Per key RGB
+#RGB_MATRIX_ENABLE = yes      # Per key RGB
 
 # Easy definition of combos
 VPATH +=  keyboards/gboards/
 
 # Keylogging
 CONSOLE_ENABLE = yes
-
-
-AUDIO_ENABLE = yes
 
 # Extra features that are nice but takes space
 WPM_ENABLE = no
@@ -18,6 +15,7 @@ MOUSEKEY_ENABLE = no        # Them mouse keys yo
 KEY_OVERRIDE_ENABLE = no
 LEADER_ENABLE = no
 TAP_DANCE_ENABLE = no
+AUDIO_ENABLE = no
 
 # Saves a bunch of memory
 EXTRAFLAGS += -flto

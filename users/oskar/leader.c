@@ -62,7 +62,6 @@ bool process_leader_impl(uint16_t keycode, uint16_t tap_count, bool pressed) {
                 break;
         }
 
-        tap_code16(KC_0);
         // let through anything above that's normal keyboard keycode or a mod
         if (keycode > QK_MODS_MAX || IS_MODIFIER_KEYCODE(keycode)) {
             return true;

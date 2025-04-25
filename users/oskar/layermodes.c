@@ -2,8 +2,8 @@
 #include "keycodes.h"
 
 static uint16_t num_word_timer;
-static bool _num_word_enabled = false;
-bool num_word_enabled(void) {
+static bool     _num_word_enabled = false;
+bool            num_word_enabled(void) {
     return _num_word_enabled;
 }
 void enable_num_word(void) {
@@ -35,8 +35,7 @@ bool process_num_word(uint16_t keycode, const keyrecord_t *record) {
         case QK_MOD_TAP ... QK_MOD_TAP_MAX:
         case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
         case QK_TAP_DANCE ... QK_TAP_DANCE_MAX:
-            if (record->tap.count == 0)
-                return true;
+            if (record->tap.count == 0) return true;
             keycode = keycode & 0xFF;
     }
     switch (keycode) {
@@ -71,4 +70,3 @@ bool process_num_word(uint16_t keycode, const keyrecord_t *record) {
     }
     return true;
 }
-
