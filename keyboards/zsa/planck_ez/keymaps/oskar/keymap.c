@@ -18,6 +18,7 @@
 #include QMK_KEYBOARD_H
 
 #include "keycodes.h"
+#include "utils.h"
 
 #include "g/keymap_combo.h"
 

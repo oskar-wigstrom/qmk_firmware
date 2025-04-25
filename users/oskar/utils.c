@@ -148,7 +148,8 @@ void clear(void) {
     stop_leading();
     disable_num_word();
     disable_caps_word();
-    layer_off(_NUM);
+    layer_off(_NAV);
+    layer_off(_WNAV);
     layer_off(_SYM);
     layer_move(_BASE);
 }
@@ -165,7 +166,7 @@ void on_smtd_action(uint16_t keycode, smtd_action action, uint8_t tap_count) {
         SMTD_MT(HR_E, KC_E, KC_RIGHT_CTRL)
         SMTD_MT(HR_N, KC_N, KC_RIGHT_SHIFT)
 
-        case LEADER_CANCEL:
+        case LEADER_SYM:
             if (action == SMTD_ACTION_TAP) {
                 if (is_leading()) {
                     stop_leading();
@@ -173,7 +174,10 @@ void on_smtd_action(uint16_t keycode, smtd_action action, uint8_t tap_count) {
                     start_leading();
                 }
             } else if (action == SMTD_ACTION_HOLD) {
-                clear();
+                layer_move(_SYM);
+            } else if (action == SMTD_ACTION_RELEASE) {
+                layer_off(_SYM);
+                layer_move(_BASE);
             }
             break;
     }
@@ -207,9 +211,6 @@ bool _process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     }
     if (!process_tap_hold(keycode, record)) {
-        return false;
-    }
-    if (!process_clicky(keycode, record)) {
         return false;
     }
 
@@ -256,7 +257,7 @@ bool _process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case KC_ENT:
             if (record->event.pressed) {
-                if (IS_LAYER_ON(_NUM)) {
+                if (IS_LAYER_ON(_SYM)) {
                     tap_code16(KC_PENT);
                 } else {
                     tap_code16(KC_ENT);
@@ -288,7 +289,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     } else {
         last_key_up = keycode;
     }
-    set_led(2, is_leading());
 
     return res;
 }
