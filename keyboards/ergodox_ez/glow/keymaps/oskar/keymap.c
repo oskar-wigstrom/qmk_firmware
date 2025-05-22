@@ -69,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_WNAV] = LAYOUT_ergodox_pretty(
   _______, G(SE_1), G(SE_2),    G(SE_3),   G(SE_4), G(SE_5), _______,         _______, G(SE_6), G(SE_7), G(SE_8), G(SE_9), _______, _______,
   _______, G(SE_Q), G(SE_COMM), G(SE_DOT), G(SE_P), xxxxxxx,_______,          _______, G(SE_J), G(SE_7), G(SE_8), G(SE_9), xxxxxxx, _______,
-  _______, G(SE_T), G(SE_W),    G(SE_E),   G(SE_R),   xxxxxxx,                           G(SE_H), G(SE_4), G(SE_5), G(SE_6), G(SE_L), _______,
+  _______, G(SE_T), G(SE_W),    G(SE_E),   G(SE_R), xxxxxxx,                         G(SE_H), G(SE_4), G(SE_5), G(SE_6), G(SE_L), _______,
   _______, xxxxxxx, G(SE_C),    xxxxxxx,   xxxxxxx, xxxxxxx, _______,         _______, G(SE_K), G(SE_1), G(SE_2), G(SE_3), xxxxxxx, _______,
   _______, _______, _______,    _______,   _______,                                             _______, _______, _______, _______, _______,
   					            _______,   _______,                           _______, _______,
@@ -78,13 +78,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 [_SYM] = LAYOUT_ergodox_pretty(
   _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
-  _______, TILD,    _______, SE_ASTR, SE_EXLM,    CIRC, _______,         _______, _______, SE_7,    SE_8,    SE_9,    SE_MINS,  _______,
-  _______, SE_PIPE, SE_LCBR, SE_RCBR, _______, SE_BSLS,                              AT_E, SE_4,    SE_5,    SE_6,    SE_PLUS,  _______,
-  _______, SE_QUES, SE_LABK, SE_RABK, SE_PERC,     GRV, _______,         _______,   SE_AT, SE_1,    SE_2,    SE_3,    KC_DEL, _______,
+  _______, TILD,    SE_QUES, SE_ASTR, SE_COLN, SE_EXLM, _______,         _______, SE_MINS, SE_7,    SE_8,    SE_9,    SE_DOT,  _______,
+  _______, SE_PIPE, SE_LCBR, SE_RCBR, SE_SCLN, SE_BSLS,                           SE_PLUS, SE_4,    SE_5,    SE_6,    SE_COMM, _______,
+  _______, SE_MINS, SE_LABK, SE_RABK, SE_PERC,    CIRC, _______,         _______,    SE_0, SE_1,    SE_2,    SE_3,    KC_DEL,  _______,
   _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
 				       			_______,	 _______,
-        			      _______, _______, _______,         _______,  _______, SE_0
+        			      _______,       QE, _______,         _______,  SE_AT, AT_E
     ),
 };
 // clang-format on
@@ -104,6 +104,7 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
         case dquo:
         case quot:
         case split:
+        case qe_comb:
         case gui_combo_l:
         case gui_combo_r:
         case dlr:
