@@ -60,10 +60,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     // Important that the symbols on the base layer have the same positions as these symbols
     [_SYM]  = LAYOUT_planck_1x2uC(
-      TILD,    _______, SE_ASTR, SE_EXLM,    CIRC,  _______,  _______,   _______,    SE_7,    SE_8,    SE_9,  SE_MINS,
-      SE_PIPE, SE_LCBR, SE_RCBR, _______, SE_BSLS,  _______,  _______,      AT_E,    SE_4,    SE_5,    SE_6,  SE_PLUS,
-      SE_QUES, SE_LABK, SE_RABK, SE_PERC,     GRV,  _______,  _______,     SE_AT,    SE_1,    SE_2,    SE_3,  KC_DEL,
-      _______, _______, _______, _______, _______,  _______,                _______, SE_0, _______, _______,  _______
+      TILD,    SE_QUES, SE_ASTR, SE_COLN, SE_EXLM,  _______,  _______,     SE_MINS,  SE_7,    SE_8,    SE_9,  SE_DOT,
+      SE_PIPE, SE_LCBR, SE_RCBR, SE_SCLN, SE_BSLS,  _______,  _______,     SE_PLUS,  SE_4,    SE_5,    SE_6,  SE_COMM,
+      SE_MINS, SE_LABK, SE_RABK, SE_PERC,    CIRC,  _______,  _______,     SE_0,     SE_1,    SE_2,    SE_3,  KC_DEL,
+      _______, _______, _______, _______,      QE,  _______,               SE_AT,    AT_E, _______, _______,  _______
     ),
 };
 // clang-format on
