@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_WNAV] = LAYOUT_planck_1x2uC(
       G(SE_Q), G(SE_COMM), G(SE_DOT), G(SE_P), xxxxxxx,   _______, _______, G(SE_J), G(SE_7),   G(SE_8), G(SE_9), xxxxxxx,
-      G(SE_T), G(SE_W),    G(SE_E),   G(SE_R), xxxxxxx,   _______, _______, G(SE_H), G(SE_4),   G(SE_5), G(SE_6), G(SE_L),
+     G(SE_T), G(SE_W),    G(SE_E),   G(SE_R), xxxxxxx,   _______, _______, G(SE_H), G(SE_4),   G(SE_5), G(SE_6), G(SE_L),
       xxxxxxx, G(SE_C),    xxxxxxx,   xxxxxxx,   xxxxxxx,   _______, _______, G(SE_K), G(SE_1),   G(SE_2), G(SE_3), xxxxxxx,
       _______, _______,    _______,   G(KC_SPC),   _______, _______,          G(KC_M), G(KC_ENT), _______, _______, _______
     ),
@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       TILD,    SE_QUES, SE_ASTR, SE_COLN, SE_EXLM,  _______,  _______,     SE_MINS,  SE_7,    SE_8,    SE_9,  SE_DOT,
       SE_PIPE, SE_LCBR, SE_RCBR, SE_SCLN, SE_BSLS,  _______,  _______,     SE_PLUS,  SE_4,    SE_5,    SE_6,  SE_COMM,
       SE_MINS, SE_LABK, SE_RABK, SE_PERC,    CIRC,  _______,  _______,     SE_0,     SE_1,    SE_2,    SE_3,  KC_DEL,
-      _______, _______, _______, _______,      QE,  _______,               SE_AT,    AT_E, _______, _______,  _______
+      _______, _______, _______, C(KC_SPC),    QE,  _______,               AT_E,     KC_ENT, _______, _______,  _______
     ),
 };
 // clang-format on

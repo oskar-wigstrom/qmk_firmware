@@ -47,8 +47,8 @@ i2c_status_t mcp23018_status = 0x20;
 
 void matrix_init_kb(void) {
     // keyboard LEDs (see "PWM on ports OC1(A|B|C)" in "teensy-2-0.md")
-    TCCR1A = 0b10101001;  // set and configure fast PWM
-    TCCR1B = 0b00001001;  // set and configure fast PWM
+    TCCR1A = 0b10101001; // set and configure fast PWM
+    TCCR1B = 0b00001001; // set and configure fast PWM
 
     // (tied to Vcc for hardware convenience)
     gpio_set_pin_input(B4); // set B(4) as input, internal pull-up disabled
@@ -139,7 +139,7 @@ uint8_t init_mcp23018(void) {
     // cli();
 
     if (i2c_initialized == 0) {
-        i2c_init();  // on pins D(1,0)
+        i2c_init(); // on pins D(1,0)
         i2c_initialized = true;
         _delay_ms(1000);
     }
@@ -150,7 +150,7 @@ uint8_t init_mcp23018(void) {
     // - unused  : input  : 1
     // - input   : input  : 1
     // - driving : output : 0
-    uint8_t data[] = {0b00000000, 0b00111111};
+    uint8_t data[]  = {0b00000000, 0b00111111};
     mcp23018_status = i2c_write_register(I2C_ADDR, IODIRA, data, 2, ERGODOX_EZ_I2C_TIMEOUT);
 
     if (!mcp23018_status) {
@@ -163,7 +163,7 @@ uint8_t init_mcp23018(void) {
 
 #ifdef LEFT_LEDS
     if (!mcp23018_status) mcp23018_status = ergodox_left_leds_update();
-#endif  // LEFT_LEDS
+#endif // LEFT_LEDS
 
     // SREG=sreg_prev;
 
@@ -172,20 +172,20 @@ uint8_t init_mcp23018(void) {
 
 #ifdef LEFT_LEDS
 uint8_t ergodox_left_leds_update(void) {
-    if (mcp23018_status) {  // if there was an error
+    if (mcp23018_status) { // if there was an error
         return mcp23018_status;
     }
-#    define LEFT_LED_1_SHIFT 7  // in MCP23018 port B
-#    define LEFT_LED_2_SHIFT 6  // in MCP23018 port B
-#    define LEFT_LED_3_SHIFT 7  // in MCP23018 port A
+#    define LEFT_LED_1_SHIFT 7 // in MCP23018 port B
+#    define LEFT_LED_2_SHIFT 6 // in MCP23018 port B
+#    define LEFT_LED_3_SHIFT 7 // in MCP23018 port A
 
     // set logical value (doesn't matter on inputs)
     // - unused  : hi-Z : 1
     // - input   : hi-Z : 1
     // - driving : hi-Z : 1
     uint8_t data[2];
-    data[0] = 0b11111111 & ~(ergodox_left_led_3 << LEFT_LED_3_SHIFT);
-    data[1] = 0b11111111 & ~(ergodox_left_led_2 << LEFT_LED_2_SHIFT) & ~(ergodox_left_led_1 << LEFT_LED_1_SHIFT);
+    data[0]         = 0b11111111 & ~(ergodox_left_led_3 << LEFT_LED_3_SHIFT);
+    data[1]         = 0b11111111 & ~(ergodox_left_led_2 << LEFT_LED_2_SHIFT) & ~(ergodox_left_led_1 << LEFT_LED_1_SHIFT);
     mcp23018_status = i2c_write_register(I2C_ADDR, OLATA, data, 2, ERGODOX_EZ_I2C_TIMEOUT);
 
     return mcp23018_status;
@@ -365,7 +365,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 }
 #endif
 
-void eeconfig_init_kb(void) {  // EEPROM is getting reset!
+void eeconfig_init_kb(void) { // EEPROM is getting reset!
     keyboard_config.raw               = 0;
     keyboard_config.led_level         = 4;
     keyboard_config.rgb_matrix_enable = true;
@@ -375,11 +375,11 @@ void eeconfig_init_kb(void) {  // EEPROM is getting reset!
 
 #ifdef ORYX_ENABLE
 static uint16_t loops = 0;
-static bool is_on = false;
+static bool     is_on = false;
 #endif
 
 #ifdef DYNAMIC_MACRO_ENABLE
-static bool is_dynamic_recording = false;
+static bool     is_dynamic_recording = false;
 static uint16_t dynamic_loop_timer;
 
 bool dynamic_macro_record_start_kb(int8_t direction) {
@@ -387,7 +387,7 @@ bool dynamic_macro_record_start_kb(int8_t direction) {
         return false;
     }
     is_dynamic_recording = true;
-    dynamic_loop_timer = timer_read();
+    dynamic_loop_timer   = timer_read();
     ergodox_right_led_1_on();
     return true;
 }
@@ -418,13 +418,12 @@ void matrix_scan_kb(void) {
 
 #ifdef CAPS_LOCK_STATUS
     led_t led_state = host_keyboard_led_state();
-    if(led_state.caps_lock) {
+    if (led_state.caps_lock) {
         ergodox_right_led_3_on();
-    }
-    else {
+    } else {
         uint8_t layer = get_highest_layer(layer_state);
-        if(layer != 1) {
-        ergodox_right_led_3_off();
+        if (layer != 1) {
+            ergodox_right_led_3_off();
         }
     }
 #endif
