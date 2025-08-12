@@ -35,30 +35,30 @@ bool tap_hold(uint16_t keycode) {
             //        case SE_8:
             //        case SE_9:
             //        case SE_0:
-        case G(SE_0):
-        case G(SE_1):
-        case G(SE_2):
-        case G(SE_3):
-        case G(SE_4):
-        case G(SE_5):
-        case G(SE_6):
-        case G(SE_7):
-        case G(SE_8):
-        case G(SE_9):
-        case G(SE_K):
-        case G(SE_J):
-        case G(SE_W):
-        case G(SE_E):
-        case G(SE_R):
-        case G(SE_C):
-        case G(SE_P):
+            //        case G(SE_0):
+            //        case G(SE_1):
+            //        case G(SE_2):
+            //        case G(SE_3):
+            //        case G(SE_4):
+            //        case G(SE_5):
+            //        case G(SE_6):
+            //        case G(SE_7):
+            //        case G(SE_8):
+            //        case G(SE_9):
+            //        case G(SE_K):
+            //        case G(SE_J):
+            //        case G(SE_W):
+            //        case G(SE_E):
+            //        case G(SE_R):
+            //        case G(SE_C):
+            //        case G(SE_P):
         case G(KC_SPC):
         case G(KC_ENT):
             //        case SE_A ... SE_Z:
-        case SE_ARNG:
-        case SE_ADIA:
-        case SE_ODIA:
-        case E_ACUT:
+            //        case SE_ARNG:
+            //        case SE_ADIA:
+            //        case SE_ODIA:
+            //        case E_ACUT:
         case CLOSE_WIN:
         case C(SE_A):
         case C(SE_C):
