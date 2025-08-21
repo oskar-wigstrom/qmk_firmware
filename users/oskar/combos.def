@@ -34,7 +34,7 @@ COMB(scln,              SE_SCLN,        SE_S, SE_D)
 COMB(split,             SPLIT,          SE_R, SE_C)
 
 // Thumbs
-//COMB(num,               NUMWORD,        L_THMB_L, R_THMB_R)       // *******
+COMB(leader,            LEADER,        L_THMB_M, R_THMB_M)       // *******
 
 // Symbols with same side thumb
 // Upper

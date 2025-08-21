@@ -1,7 +1,7 @@
 #include "quantum.h"
 
-#include "sm_td.h"
 #include "keycodes.h"
+#include "sm_td.h"
 #include "oneshot.h"
 #include "leader.h"
 #include "tap_hold.h"
@@ -154,23 +154,37 @@ void clear(void) {
     layer_move(_BASE);
 }
 
-void on_smtd_action(uint16_t keycode, smtd_action action, uint8_t tap_count) {
+smtd_resolution on_smtd_action(uint16_t keycode, smtd_action action, uint8_t tap_count) {
     switch (keycode) {
-        SMTD_MT(HR_A, KC_A, KC_LEFT_ALT)
-        SMTD_MT(HR_R, KC_R, KC_LEFT_GUI)
-        SMTD_MT(HR_S, KC_S, KC_LEFT_CTRL)
-        SMTD_MT(HR_T, KC_T, KC_LEFT_SHIFT)
+        SMTD_MT(SE_A, KC_LEFT_ALT)
+        SMTD_MT(SE_R, KC_LEFT_GUI)
+        SMTD_MT(SE_S, KC_LEFT_CTRL)
+        SMTD_MT(SE_T, KC_LSFT)
 
-        SMTD_MT(HR_O, KC_O, KC_LEFT_ALT)
-        SMTD_MT(HR_I, KC_I, KC_RIGHT_GUI)
-        SMTD_MT(HR_E, KC_E, KC_RIGHT_CTRL)
-        SMTD_MT(HR_N, KC_N, KC_RIGHT_SHIFT)
+        SMTD_MT(SE_O, KC_LEFT_ALT)
+        SMTD_MT(SE_I, KC_RIGHT_GUI)
+        SMTD_MT(SE_E, KC_RIGHT_CTRL)
+        SMTD_MT(SE_N, KC_RSFT)
 
-        case LEADER_SYM:
+        SMTD_LT_ON_MKEY(L_THMB_L, KC_ESC, _NAV) // placeholder layer
+        SMTD_LT_ON_MKEY(L_THMB_M, KC_SPC, _NAV)
+        SMTD_LT_ON_MKEY(L_THMB_R, KC_TAB, _SYM)
+
+        SMTD_LT_ON_MKEY(R_THMB_L, KC_BSPC, _SYM) // placeholder layer
+        SMTD_LT_ON_MKEY(R_THMB_M, KC_ENT, _SYM)
+            //      SMTD_LT_ON_MKEY(R_THMB_R, KC_DEL, _SYM) // placeholder layer
+
+        case R_THMB_R:
+            uprintf("thmb");
+
             if (action == SMTD_ACTION_TAP) {
+                uprintf("tap");
+
                 if (is_leading()) {
                     stop_leading();
                 } else {
+                    uprintf("thmb");
+
                     start_leading();
                 }
             } else if (action == SMTD_ACTION_HOLD) {
@@ -179,8 +193,10 @@ void on_smtd_action(uint16_t keycode, smtd_action action, uint8_t tap_count) {
                 layer_off(_SYM);
                 layer_move(_BASE);
             }
-            break;
+            return SMTD_RESOLUTION_DETERMINED;
     }
+
+    return SMTD_RESOLUTION_UNHANDLED;
 }
 bool _process_record_user(uint16_t keycode, keyrecord_t *record) {
 #if !defined(IS_ERGODOX) && !defined(IS_PLANCK)
@@ -188,19 +204,11 @@ bool _process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
 
     // Debugging
-#ifdef CONSOLE_ENABLE
-    if (record->event.pressed) {
-#    if defined(IS_ERGODOX)
-        uprintf("E0x%04X,%u,%u,%u,%b,0x%02X,0x%02X,%u\n", keycode, record->event.key.row, record->event.key.col, get_highest_layer(layer_state), record->event.pressed, get_mods(), get_oneshot_mods(), record->tap.count);
-#    elif defined(IS_PLANCK)
-        uprintf("P0x%04X,%u,%u,%u,%b,0x%02X,0x%02X,%u\n", keycode, record->event.key.row, record->event.key.col, get_highest_layer(layer_state), record->event.pressed, get_mods(), get_oneshot_mods(), record->tap.count);
-#    endif
-    }
-#endif
 
     if (!process_smtd(keycode, record)) {
         return false;
     }
+    return true;
     if (!process_leader(keycode, record)) {
         return false;
     }
@@ -276,13 +284,22 @@ bool _process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    process_oneshot_pre(keycode, record);
+// process_oneshot_pre(keycode, record);
+#ifdef CONSOLE_ENABLE
 
+    if (record->event.pressed) {
+        keypos_t     *key           = &(record->event.key);
+        uint8_t const current_layer = get_highest_layer(layer_state);
+        uint8_t const qmk_fn        = keymap_key_to_keycode(current_layer, *key);
+        uint8_t const lookup_table  = keymaps[current_layer][key->row][key->col];
+        uprintf("qmk_fn: %u, lookup_table: %u\n", qmk_fn, lookup_table);
+    }
+#endif
     // If `false` was returned, then we did something special and should register that manually.
     // Otherwise register keyrepeat here by default.
     bool res = _process_record_user(keycode, record);
 
-    process_oneshot_post(keycode, record);
+    //  process_oneshot_post(keycode, record);
 
     if (record->event.pressed) {
         last_key_down = keycode;

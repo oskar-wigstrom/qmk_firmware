@@ -52,26 +52,18 @@ enum custom_keycodes {
     AT_E,
     QE,
 
-    // Homerow mods
-    SMTD_KEYCODES_BEGIN,
-    HR_A,
-    HR_R,
-    HR_S,
-    HR_T,
-    HR_N,
-    HR_E,
-    HR_I,
-    HR_O,
-    LEADER_SYM,
-    SMTD_KEYCODES_END,
+    LEADER,
+
+    L_THMB_L,
+    L_THMB_M,
+    L_THMB_R,
+    R_THMB_L,
+    R_THMB_M,
+    R_THMB_R,
+
 };
 
 #define xxxxxxx KC_NO
-
-#define L_THMB_L LT(_NAV, KC_SPC)
-#define L_THMB_R LEADER_SYM
-#define R_THMB_L LT(_NAV, KC_TAB)
-#define R_THMB_R LT(_SYM, KC_ENT)
 
 #define COLN_SYM LT(_SYM, SE_COLN)
 

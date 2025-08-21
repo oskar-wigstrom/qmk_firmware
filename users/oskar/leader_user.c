@@ -14,12 +14,15 @@ void *leader_start_func(uint16_t keycode) {
             tap_caps_lock();
             return NULL;
         case KC_W:
+
+            uprintf("capr word");
             enable_caps_word();
             return NULL;
         case KC_N:
             layer_invert(_NAV);
             return NULL;
         case KC_S:
+            uprintf("sym");
             layer_invert(_SYM);
             return NULL;
         default:

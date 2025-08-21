@@ -7,6 +7,7 @@ VPATH +=  keyboards/gboards/
 
 # Keylogging
 CONSOLE_ENABLE = yes
+SMTD_DEBUG_ENABLED = yes
 
 # Extra features that are nice but takes space
 WPM_ENABLE = no
