@@ -8,7 +8,6 @@
 #include "sendstring_swedish.h"
 
 #include "features/custom_shift_keys.h"
-// #include "features/caps_word.h"
 #include "features/sm_td.h"
 
 #ifdef CONSOLE_ENABLE
@@ -61,7 +60,7 @@ const custom_shift_key_t custom_shift_keys[] = {
 // clang-format on
 uint8_t NUM_CUSTOM_SHIFT_KEYS = sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
 
-bool my_lt(smtd_action action, uint16_t pressed, uint16_t keycode, uint16_t layer) {
+bool my_lt(smtd_action action, uint16_t pressed, uint16_t keycode, uint16_t layer, uint8_t tap_count) {
     if (pressed != keycode) {
         return false;
     }
@@ -73,40 +72,74 @@ bool my_lt(smtd_action action, uint16_t pressed, uint16_t keycode, uint16_t laye
             tap_code16(keycode);
             break;
         case SMTD_ACTION_HOLD:
-            LAYER_PUSH(layer);
+            switch (tap_count) {
+                case 0:
+                    LAYER_PUSH(layer);
+                    break;
+                default:
+                    register_code(keycode);
+                    break;
+            }
             break;
         case SMTD_ACTION_RELEASE:
-            LAYER_RESTORE();
+            switch (tap_count) {
+                case 0:
+                    LAYER_RESTORE();
+                    break;
+                default:
+                    unregister_code(keycode);
+                    break;
+            }
             break;
     }
     return true;
 }
+#define MOD_TIMEOUT_TAP 100
+#define HRM_TIMEOUT_TAP 200
+
+uint32_t get_smtd_timeout(uint16_t keycode, smtd_timeout timeout) {
+    switch (keycode) {
+        case KC_SPC:
+        case KC_ESC:
+        case KC_ENT:
+        case KC_TAB:
+            if (timeout == SMTD_TIMEOUT_TAP) return MOD_TIMEOUT_TAP;
+            if (timeout == SMTD_TIMEOUT_SEQUENCE) return MOD_TIMEOUT_TAP / 2;
+            if (timeout == SMTD_TIMEOUT_RELEASE) return MOD_TIMEOUT_TAP / 4;
+        case SE_A ... SE_Z:
+            if (timeout == SMTD_TIMEOUT_TAP) return HRM_TIMEOUT_TAP;
+            if (timeout == SMTD_TIMEOUT_SEQUENCE) return HRM_TIMEOUT_TAP / 2;
+            if (timeout == SMTD_TIMEOUT_RELEASE) return HRM_TIMEOUT_TAP / 4;
+    }
+
+    return get_smtd_timeout_default(timeout);
+}
 smtd_resolution on_smtd_action(uint16_t keycode, smtd_action action, uint8_t tap_count) {
-    if (my_lt(action, keycode, KC_SPC, _NAV) || my_lt(action, keycode, KC_ESC, _SNUM) || my_lt(action, keycode, KC_ENT, _SYM) || my_lt(action, keycode, KC_TAB, _NUM)) {
+    // clang-format off
+    if (my_lt(action, keycode, KC_SPC, _NAV, tap_count) ||
+        my_lt(action, keycode, KC_ESC, _SNUM, tap_count) ||
+        my_lt(action, keycode, KC_ENT, _SYM, tap_count) ||
+        my_lt(action, keycode, KC_TAB, _NUM, tap_count))
+    // clang-format on
+    {
         return SMTD_RESOLUTION_DETERMINED;
     }
     switch (keycode) {
-        SMTD_LT(KC_ENT, _SYM)
-        SMTD_LT(KC_TAB, _SYM)
+        SMTD_MTE(SE_A, KC_LEFT_ALT)
+        SMTD_MTE(SE_R, KC_LEFT_GUI)
+        SMTD_MTE(SE_S, KC_LEFT_CTRL)
+        SMTD_MTE(SE_T, KC_LSFT)
 
-        SMTD_MT(SE_A, KC_LEFT_ALT)
-        SMTD_MT(SE_R, KC_LEFT_GUI)
-        SMTD_MT(SE_S, KC_LEFT_CTRL)
-        SMTD_MT(SE_T, KC_LSFT)
-
-        SMTD_MT(SE_O, KC_LEFT_ALT)
-        SMTD_MT(SE_I, KC_RIGHT_GUI)
-        SMTD_MT(SE_E, KC_RIGHT_CTRL)
-        SMTD_MT(SE_N, KC_RSFT)
+        SMTD_MTE(SE_O, KC_LEFT_ALT)
+        SMTD_MTE(SE_I, KC_RIGHT_GUI)
+        SMTD_MTE(SE_E, KC_RIGHT_CTRL)
+        SMTD_MTE(SE_N, KC_RSFT)
     }
     return SMTD_RESOLUTION_UNHANDLED;
 }
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    uprintf("process_record_user: %04X %s\n", keycode, record->event.pressed ? "pressed" : "released");
     if (!process_smtd(keycode, record)) return false;
-    uprintf("process_record_user: after smtd\n");
     if (!process_custom_shift_keys(keycode, record)) return false;
-    // if (!process_caps_word(keycode, record)) return false;
 
     switch (keycode) {
         case TILD:

@@ -32,5 +32,9 @@ LEADER_ENABLE = yes
 # Homerow mods (with sm_td)
 DEFERRED_EXEC_ENABLE = yes
 
+DEBOUNCE = 3
+
+
+
 SRC += keycodes.c
 SRC += features/custom_shift_keys.c
