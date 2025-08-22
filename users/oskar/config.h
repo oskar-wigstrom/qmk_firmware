@@ -27,7 +27,7 @@
 #define SMTD_GLOBAL_TAP_TERM TAPPING_TERM
 #define SMTD_GLOBAL_FOLLOWING_TAP_TERM TAPPING_TERM
 #define SMTD_GLOBAL_SEQUENCE_TERM TAPPING_TERM / 2
-#define SMTD_GLOBAL_RELEASE_TERM TAPPING_TERM / 6
+#define SMTD_GLOBAL_RELEASE_TERM TAPPING_TERM / 4
 
 // Prevent normal rollover on alphas from accidentally triggering mods.
 // Now the default behavior!
@@ -39,28 +39,12 @@
 // Immediately turn on layer if key is pressed quickly
 #define HOLD_ON_OTHER_KEY_PRESS
 
-// Combos
-#undef COMBO_TERM
-#define COMBO_TERM 35
-#define COMBO_MUST_TAP_PER_COMBO
-#define COMBO_TERM_PER_COMBO
-// All combos are specified from the base layer, saves space
-#define COMBO_ONLY_FROM_LAYER 0
-
-#define DEFAULT_XCASE_SEPARATOR SE_MINS
-#define XCASE_DELIMITER_KEY SE_UNDS
-
-// Cannot import "keymap_swedish.h" as it sometimes generates extremely weird errors.
-#define LEADER_ESC_KEY KC_E
-
 // Not supported without flto
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
 // Save space
 // #define LAYER_STATE_8BIT
 #define LAYER_STATE_16BIT
-// These are a bit iffy, as I don't know what they're doing, but it "works fine" according to Discord people
-// #undef LOCKING_SUPPORT_ENABLE
-// #undef LOCKING_RESYNC_ENABLE
 
-#define MAX_DEFERRED_EXECUTORS 10
+#define CAPS_WORD_IDLE_TIMEOUT 0
+#define CAPS_WORD_TOGGLE_KEY

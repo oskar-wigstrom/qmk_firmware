@@ -38,13 +38,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_BASE] = LAYOUT_ergodox_pretty(
   _______, SE_1,    SE_2,    SE_3,    SE_4,    SE_5,    _______,         _______, SE_6,    SE_7,    SE_8,    SE_9,    SE_0,    _______,
-  _______, SE_COMM, SE_W,    SE_F,    SE_P,    SE_B,    _______,         _______, SE_J,    SE_L,    SE_U,    SE_Y,    SE_DOT,  _______,
+  _______, SE_Q,    SE_W,    SE_F,    SE_P,    SE_B,    _______,         _______, SE_J,    SE_L,    SE_U,    SE_Y,    SE_QUOT,  _______,
   _______, SE_A,    SE_R,    KC_S,    SE_T,    SE_G,                              SE_M,    SE_N,    SE_E,    SE_I,    SE_O,    _______,
-  _______, SE_SLSH, SE_X,    SE_C,    SE_D,    SE_V,    _______,         _______, SE_K,    SE_H,    SE_LPRN, SE_RPRN, SE_UNDS, _______,
-  _______, _______, _______, _______, L_THMB_L,                                             R_THMB_R, _______, _______, _______, _______,
+  _______, SE_Z,    SE_X,    SE_C,    SE_D,    SE_V,    _______,         _______, SE_K,    SE_H,    SE_COMM, SE_DOT,  SE_SLSH, _______,
+  _______, CAPS_WORD, _______, _______, KC_ESC,                                             KC_BSPC, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
 				       			_______,	 _______,
-        				         L_THMB_M,  L_THMB_R, _______,         _______,    R_THMB_L,  R_THMB_M
+        				         KC_SPC,  KC_TAB, _______,         _______,    LEADER,  KC_ENT
       ),
 [_SWE] = LAYOUT_ergodox_pretty(
   _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
@@ -58,33 +58,43 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 [_NAV] = LAYOUT_ergodox_pretty(
   _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
-  _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,         _______, xxxxxxx, G(SE_W), G(SE_E), G(SE_R), xxxxxxx, _______,
-  _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,                           xxxxxxx, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-  _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,         _______, xxxxxxx, KC_HOME, KC_PGUP, KC_END,   KC_END, _______,
+  _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,         _______,    REDO,   PASTE,    COPY,    CUT,     UNDO, _______,
+  _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,                           KC_CAPS, KC_LEFT, KC_DOWN,  KC_UP,  KC_RGHT, _______,
+  _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,         _______,  KC_INS, KC_HOME, KC_PGUP, KC_END,   KC_END, _______,
   _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
 				       			_______,	 _______,
         			            _______, _______, _______,         _______,    _______, _______
     ),
-[_WNAV] = LAYOUT_ergodox_pretty(
-  _______, G(SE_1), G(SE_2),    G(SE_3),   G(SE_4), G(SE_5), _______,         _______, G(SE_6), G(SE_7), G(SE_8), G(SE_9), _______, _______,
-  _______, G(SE_Q), G(SE_COMM), G(SE_DOT), G(SE_P), xxxxxxx,_______,          _______, G(SE_J), G(SE_7), G(SE_8), G(SE_9), xxxxxxx, _______,
-  _______, G(SE_T), G(SE_W),    G(SE_E),   G(SE_R), xxxxxxx,                         G(SE_H), G(SE_4), G(SE_5), G(SE_6), G(SE_L), _______,
-  _______, xxxxxxx, G(SE_C),    xxxxxxx,   xxxxxxx, xxxxxxx, _______,         _______, G(SE_K), G(SE_1), G(SE_2), G(SE_3), xxxxxxx, _______,
-  _______, _______, _______,    _______,   _______,                                             _______, _______, _______, _______, _______,
-  					            _______,   _______,                           _______, _______,
-				       			_______,                                               _______,
-        			   G(KC_SPC), _______, _______,                           _______,  G(KC_M), G(KC_ENT)
-    ),
-[_SYM] = LAYOUT_ergodox_pretty(
+[_NUM] = LAYOUT_ergodox_pretty(
   _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
-  _______, TILD,    SE_QUES, SE_ASTR, SE_COLN, SE_EXLM, _______,         _______, SE_MINS, SE_7,    SE_8,    SE_9,    SE_DOT,  _______,
-  _______, SE_PIPE, SE_LCBR, SE_RCBR, SE_SCLN, SE_BSLS,                           SE_PLUS, SE_4,    SE_5,    SE_6,    SE_COMM, _______,
-  _______, SE_MINS, SE_LABK, SE_RABK, SE_PERC,    CIRC, _______,         _______,    SE_0, SE_1,    SE_2,    SE_3,    KC_DEL,  _______,
+  _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,         _______, _______, SE_7,    SE_8,    SE_9,    _______,  _______,
+  _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, xxxxxxx,                           SE_PLUS, SE_4,    SE_5,    SE_6,    _______, _______,
+  _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,         _______, SE_BSLS, SE_1,    SE_2,    SE_3,    _______,  _______,
   _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
 				       			_______,	 _______,
-        			      C(KC_SPC),       QE, _______,         _______,   AT_E, KC_ENT
+        			      _______, _______, _______,         _______,   SE_MINS, SE_0
+    ),
+[_SNUM] = LAYOUT_ergodox_pretty(
+  _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
+  _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,         _______, _______,    CIRC, SE_DQUO, SE_COLN,    _______,  _______,
+  _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, xxxxxxx,                           _______,  SE_DLR, SE_PERC, SE_AMPR,    _______, _______,
+  _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,         _______, SE_PIPE, SE_EXLM,   SE_AT, SE_HASH,    _______,  _______,
+  _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
+  					       _______, _______,         _______, _______,
+				       			_______,	 _______,
+        			      _______, _______, _______,         _______,   SE_UNDS, SE_EQL
+    ),
+[_SYM] = LAYOUT_ergodox_pretty(
+  _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
+  _______, TILD,    SE_LBRC, SE_RBRC, _______, _______, _______,         _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,  _______,
+  _______, SE_LPRN, SE_LCBR, SE_RCBR, SE_RPRN, _______,                           xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,
+  _______, _______, SE_LABK, SE_RABK, _______, _______, _______,         _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,  _______,
+  _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
+  					       _______, _______,         _______, _______,
+				       			_______,	 _______,
+        			      _______, _______, _______,         _______,   _______, _______
     ),
 };
 // clang-format on
@@ -93,56 +103,6 @@ void matrix_init_user(void) {
 
     rgb_matrix_enable();
     rgb_matrix_mode(RGB_MATRIX_TYPING_HEATMAP);
-}
-
-// Combos
-
-uint16_t get_combo_term(uint16_t index, combo_t *combo) {
-    switch (index) {
-        // Home-row and other tight combos
-        case del:
-        case dquo:
-        case quot:
-        case split:
-        case qe_comb:
-        case gui_combo_l:
-        case gui_combo_r:
-        case dlr:
-            return COMBO_TERM;
-            // Vertical combos, very relaxed
-            /*      case small_left_arrow:
-                    case lt_eq:
-                    case large_right_arrow:
-                    case small_right_arrow:
-                    case pipe_to: */
-        case split_vs:
-            //        case gt_eq:
-            return COMBO_TERM + 55;
-        // Regular combos, slightly relaxed
-        default:
-            return COMBO_TERM + 25;
-    }
-}
-
-bool get_combo_must_tap(uint16_t index, combo_t *combo) {
-    switch (index) {
-        case del:
-        case arng:
-        case adia:
-        case odia:
-        case eql:
-        case gui_combo_l:
-        case gui_combo_r:
-        case close_win:
-        case split_vs:
-        case split:
-        case coln_sym:
-        case dquo:
-        case quot:
-            return false;
-        default:
-            return true;
-    }
 }
 
 void set_led(uint8_t id, bool on) {

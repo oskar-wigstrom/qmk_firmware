@@ -6,9 +6,8 @@
 #include "quantum.h"
 #include "quantum/action.h"
 #include "quantum/quantum_keycodes.h"
-#include "oneshot.h"
 
-enum layers { _BASE = 0, _SWE, _NUM, _NAV, _WNAV, _SYM, _MODS, _FUN };
+enum layers { _BASE = 0, _SWE, _NAV, _SYM, _NUM, _SNUM };
 
 enum custom_keycodes {
     // Direct dead keys ~`^
@@ -16,59 +15,17 @@ enum custom_keycodes {
     GRV,
     CIRC,
 
-    // Vim
-    SAVE_VIM,
-    CLOSE_WIN,
-    SPLIT_VS,
-    SPLIT,
-
-    // É
-    E_ACUT,
-
-    // Custom keycodes for instant processing for NUMWORD
-    NUM_G,
-
-    // Instant oneshot mods
-    OS_SHFT,
-    OS_CTRL,
-    OS_ALT,
-    OS_GUI,
-
-    // Smart caps lock and layers that turn off on certain keys
-    CAPSWORD,
-    NUMWORD,
-
-    // Layer management
-    CANCEL, // Cancel SYMWORD and NUMWORD
-    CLEAR,  // Clear all WORD, one-shots and reset to BASE
-
     TG_SWE,
 
-    // Repeat keys
-    REPEAT,
-    REV_REP,
-
-    //
-    AT_E,
-    QE,
-
     LEADER,
-
-    L_THMB_L,
-    L_THMB_M,
-    L_THMB_R,
-    R_THMB_L,
-    R_THMB_M,
-    R_THMB_R,
-
+    CAPS_WORD,
 };
 
 #define xxxxxxx KC_NO
 
-#define COLN_SYM LT(_SYM, SE_COLN)
+#define COPY C(S(SE_C))
+#define PASTE C(S(SE_V))
+#define CUT C(S(SE_X))
 
-#define NUM OSL(_NUM)
-#define OS_WNAV OSL(_WNAV)
-#define OPT OSL(_OPT)
-#define SPEC OSL(_SPEC)
-#define FUN OSL(_FUN)
+#define UNDO C(SE_Z)
+#define REDO C(S(SE_Z))

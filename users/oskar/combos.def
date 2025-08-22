@@ -1,8 +1,4 @@
 // Left top row
-COMB(q_comb,            SE_Q,           SE_W, SE_F)
-COMB(qe_comb,           QE,             SE_W, SE_COMM)
-COMB(z_comb,            SE_Z,           SE_F, SE_P)
-
 // Right top row
 COMB(eql,               SE_EQL,         SE_L, SE_U)
 
@@ -13,31 +9,19 @@ COMB(del,               KC_DEL,         SE_T, SE_G)
 // Right home row
 COMB(coln_sym,          SE_COLN,       SE_N, SE_E)
 COMB(quot,              SE_QUOT,        SE_N, SE_I)
-COMB(save_vim,          SAVE_VIM,       SE_N, SE_E, SE_I, SE_O)
-
-// Mixed
-COMB(capsword,          CAPSWORD,       SE_S, SE_E)
-
-// Left bottom row
-COMB(split_vs,          SPLIT_VS,       SE_X, SE_C)
-COMB(gui_combo_l,       OS_WNAV,        SE_C, SE_D)
-COMB(close_win,         CLOSE_WIN,      SE_X, SE_C, SE_D)
-COMB(shift_combo_l,     KC_LSFT,        SE_D, SE_V)
 
 // Right bottom row
-COMB(gui_combo_r,       OS_WNAV,        SE_H, SE_LPRN)
 COMB(dlr,               SE_DLR,         SE_LPRN, SE_RPRN)
 COMB(swe,               TG_SWE,         SE_H, SE_LPRN, SE_RPRN)
 
-// Mixed home row + other
-COMB(scln,              SE_SCLN,        SE_S, SE_D)
-COMB(split,             SPLIT,          SE_R, SE_C)
 
+/*
 // Thumbs
 COMB(leader,            LEADER,        L_THMB_M, R_THMB_M)       // *******
 
 // Symbols with same side thumb
 // Upper
+
 COMB(comb_tild,         TILD,           L_THMB_L, SE_COMM)
 COMB(comb_plus,         SE_PLUS,        L_THMB_L, SE_W)
 COMB(comb_astr,         SE_ASTR,        L_THMB_L, SE_F)
@@ -73,6 +57,6 @@ COMB(comb_3,            SE_3,           R_THMB_R, SE_RPRN)
 COMB(arng,              SE_ARNG,        L_THMB_L, SE_LPRN)
 COMB(adia,              SE_ADIA,        L_THMB_L, SE_RPRN)
 COMB(odia,              SE_ODIA,        L_THMB_L, SE_UNDS)
-
+*/
 // Specials
 //COMB(ctrl_gui_space,    C(G(KC_SPACE)), L_THMB_L, SE_N, SE_E)
