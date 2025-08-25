@@ -39,12 +39,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_BASE] = LAYOUT_ergodox_pretty(
   _______, SE_1,    SE_2,    SE_3,    SE_4,    SE_5,    _______,         _______, SE_6,    SE_7,    SE_8,    SE_9,    SE_0,    _______,
   _______, SE_Q,    SE_W,    SE_F,    SE_P,    SE_B,    _______,         _______, SE_J,    SE_L,    SE_U,    SE_Y,    SE_QUOT,  _______,
-  _______, SE_A,    SE_R,    KC_S,    SE_T,    SE_G,                              SE_M,    SE_N,    SE_E,    SE_I,    SE_O,    _______,
+  _______, HR_A,    HR_R,    HR_S,    HR_T,    SE_G,                              SE_M,    HR_N,    HR_E,    HR_I,    HR_O,    _______,
   _______, SE_Z,    SE_X,    SE_C,    SE_D,    SE_V,    _______,         _______, SE_K,    SE_H,    SE_COMM, SE_DOT,  SE_SLSH, _______,
-  _______, CAPS_WORD, _______, _______, KC_ESC,                                             KC_BSPC, _______, _______, _______, _______,
+  _______, CAPS_WORD, _______, _______, L_TMB_L,                                             KC_BSPC, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
 				       			_______,	 _______,
-        				         KC_SPC,  KC_TAB, _______,         _______,    LEADER,  KC_ENT
+        				         L_TMB_M,  L_TMB_R, _______,         _______,    LEADER,  R_TMB_M
       ),
 [_SWE] = LAYOUT_ergodox_pretty(
   _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,

@@ -3,12 +3,12 @@
 COMB(eql,               SE_EQL,         SE_L, SE_U)
 
 // Left home row
-COMB(dquo,              SE_DQUO,        SE_R, SE_T)
-COMB(del,               KC_DEL,         SE_T, SE_G)
+COMB(dquo,              SE_DQUO,        HR_R, HR_T)
+//COMB(del,               KC_DEL,         SE_T, SE_G)
 
 // Right home row
-COMB(coln_sym,          SE_COLN,       SE_N, SE_E)
-COMB(quot,              SE_QUOT,        SE_N, SE_I)
+COMB(coln_sym,          SE_COLN,       HR_N, HR_E)
+COMB(quot,              SE_QUOT,        HR_N, HR_I)
 
 // Right bottom row
 COMB(dlr,               SE_DLR,         SE_LPRN, SE_RPRN)

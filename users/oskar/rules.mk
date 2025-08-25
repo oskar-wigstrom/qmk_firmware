@@ -1,4 +1,3 @@
-COMBO_ENABLE = yes
 RGBLIGHT_ENABLE = no        # Keyboard RGB underglow
 #RGB_MATRIX_ENABLE = yes      # Per key RGB
 
@@ -28,6 +27,7 @@ GRAVE_ESC_ENABLE = no
 # Features
 CAPS_WORD_ENABLE = yes
 LEADER_ENABLE = yes
+COMBO_ENABLE = yes
 
 # Homerow mods (with sm_td)
 DEFERRED_EXEC_ENABLE = yes

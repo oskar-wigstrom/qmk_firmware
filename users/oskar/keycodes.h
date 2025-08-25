@@ -29,3 +29,19 @@ enum custom_keycodes {
 
 #define UNDO C(SE_Z)
 #define REDO C(S(SE_Z))
+
+#define L_TMB_L LT(_SNUM, KC_ESC)
+#define L_TMB_M LT(_NAV, KC_SPC)
+#define L_TMB_R LT(_NUM, KC_TAB)
+
+#define R_TMB_M LT(_SYM, KC_ENT)
+
+#define HR_A MT(MOD_LALT, SE_A)
+#define HR_R MT(MOD_LGUI, SE_R)
+#define HR_S MT(MOD_LCTL, SE_S)
+#define HR_T MT(MOD_LSFT, SE_T)
+
+#define HR_O MT(MOD_LALT, SE_O)
+#define HR_I MT(MOD_RGUI, SE_I)
+#define HR_E MT(MOD_RCTL, SE_E)
+#define HR_N MT(MOD_RSFT, SE_N)
