@@ -14,6 +14,17 @@
 #endif
 
 // clang-format off
+const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM = LAYOUT_ergodox_pretty(
+  'L', 'L', 'L', 'L', 'L', 'L', 'L',    'R', 'R', 'R', 'R', 'R', 'R', 'R',
+  'L', 'L', 'L', 'L', 'L', 'L', 'L',    'R', 'R', 'R', 'R', 'R', 'R', 'R',
+  'L', 'L', 'L', 'L', 'L', 'L',              'R', 'R', 'R', 'R', 'R', 'R',
+  'L', 'L', 'L', 'L', 'L', 'L', 'L',    'R', 'R', 'R', 'R', 'R', 'R', 'R',
+  'L', 'L', 'L', 'L', 'L',                        'R', 'R', 'R', 'R', 'R',
+                           'L', 'L',    'R', 'R',
+                                'L',    'R',
+                      'L', 'L', 'L',    'R', 'R', 'R'
+);
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
@@ -38,13 +49,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_BASE] = LAYOUT_ergodox_pretty(
   _______, SE_1,    SE_2,    SE_3,    SE_4,    SE_5,    _______,         _______, SE_6,    SE_7,    SE_8,    SE_9,    SE_0,    _______,
-  _______, SE_Q,    SE_W,    SE_F,    SE_P,    SE_B,    _______,         _______, SE_J,    SE_L,    SE_U,    SE_Y,    SE_QUOT,  _______,
+  _______, SE_Q,    SE_W,    SE_F,    SE_P,    SE_B,    _______,         _______, SE_J,    SE_L,    SE_U,    SE_Y,    SE_DOT,  _______,
   _______, HR_A,    HR_R,    HR_S,    HR_T,    SE_G,                              SE_M,    HR_N,    HR_E,    HR_I,    HR_O,    _______,
-  _______, SE_Z,    SE_X,    SE_C,    SE_D,    SE_V,    _______,         _______, SE_K,    SE_H,    SE_COMM, SE_DOT,  SE_SLSH, _______,
-  _______, CAPS_WORD, _______, _______, L_TMB_L,                                             KC_BSPC, _______, _______, _______, _______,
+  _______, SE_Z,    SE_X,    SE_C,    SE_D,    SE_V,    _______,         _______, SE_K,    SE_H,    SE_LPRN, SE_RPRN,  SE_SLSH, _______,
+  _______, _______, _______, _______, L_TMB_R,                                             R_TMB_L, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
 				       			_______,	 _______,
-        				         L_TMB_M,  L_TMB_R, _______,         _______,    LEADER,  R_TMB_M
+        				         L_TMB_M,  L_TMB_R, _______,         _______,    R_TMB_L,  R_TMB_M
       ),
 [_SWE] = LAYOUT_ergodox_pretty(
   _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
@@ -68,29 +79,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 [_NUM] = LAYOUT_ergodox_pretty(
   _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
-  _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,         _______, _______, SE_7,    SE_8,    SE_9,    _______,  _______,
+  _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,         _______, SE_MINS, SE_7,    SE_8,    SE_9,    _______,  _______,
   _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, xxxxxxx,                           SE_PLUS, SE_4,    SE_5,    SE_6,    _______, _______,
-  _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,         _______, SE_MINS, SE_1,    SE_2,    SE_3,    _______,  _______,
+  _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,         _______, SE_BSLS, SE_1,    SE_2,    SE_3,    _______,  _______,
   _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
 				       			_______,	 _______,
-        			      _______, _______, _______,         _______,   SE_BSLS, SE_0
-    ),
-[_SNUM] = LAYOUT_ergodox_pretty(
-  _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
-  _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,         _______, _______,    CIRC, SE_DQUO, SE_COLN,    _______,  _______,
-  _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, xxxxxxx,                           _______,  SE_DLR, SE_PERC, SE_AMPR,    _______, _______,
-  _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,         _______, SE_UNDS, SE_EXLM,   SE_AT, SE_HASH,    _______,  _______,
-  _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
-  					       _______, _______,         _______, _______,
-				       			_______,	 _______,
-        			      _______, _______, _______,         _______,   SE_PIPE, SE_EQL
+        			      _______, _______, _______,         _______,   _______, SE_0
     ),
 [_SYM] = LAYOUT_ergodox_pretty(
   _______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
-  _______, TILD,    SE_LBRC, SE_RBRC, _______, _______, _______,         _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,  _______,
-  _______, SE_LPRN, SE_LCBR, SE_RCBR, SE_RPRN, _______,                           xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,
-  _______, _______, SE_LABK, SE_RABK, _______, _______, _______,         _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,  _______,
+  _______,    TILD, SE_ASTR,    CIRC, SE_EXLM, _______, _______,         _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,  _______,
+  _______, SE_AMPR, SE_LCBR, SE_RCBR, SE_PIPE, _______,                           xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,
+  _______, SE_HASH, SE_LABK, SE_RABK, SE_AT, _______, _______,         _______, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,  _______,
   _______, _______, _______, _______, _______,                                             _______, _______, _______, _______, _______,
   					       _______, _______,         _______, _______,
 				       			_______,	 _______,
@@ -98,9 +99,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 };
 // clang-format on
-void matrix_init_user(void) {
-    /* rgb_matrix_config.mode = RGB_MATRIX_TYPING_HEATMAP; */
-
+void keyboard_post_init_user(void) {
     rgb_matrix_enable();
     rgb_matrix_mode(RGB_MATRIX_TYPING_HEATMAP);
 }

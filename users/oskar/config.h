@@ -24,15 +24,17 @@
 // ----- Tap/hold timing -----
 #define TAPPING_TERM 200   // base tap/hold threshold in ms
 #define QUICK_TAP_TERM 120 // fast release always = tap
+#define TAPPING_TERM_PER_KEY
+#define FLOW_TAP_TERM 150
 
 // ----- Resolution rules -----
-#define PERMISSIVE_HOLD         // pressing another key = hold
-#define TAPPING_FORCE_HOLD      // prefer hold when interrupted
-#define HOLD_ON_OTHER_KEY_PRESS // force hold if another key is pressed
+// #define PERMISSIVE_HOLD         // pressing another key = hold
+// #define TAPPING_FORCE_HOLD // prefer hold when interrupted
+// #define HOLD_ON_OTHER_KEY_PRESS // force hold if another key is pressed
 
 // ----- Home-row-specific helpers -----
-#define BILATERAL_COMBINATIONS // same-hand = tap, opposite-hand = hold
-#define CORDAL_HOLD            // multiple home row mods held together = holds
+#define CHORDAL_HOLD // multiple home row mods held together = holds
+#define PERMISSIVE_HOLD
 
 // Not supported without flto
 #define NO_ACTION_MACRO
@@ -43,3 +45,5 @@
 
 #define CAPS_WORD_IDLE_TIMEOUT 0
 #define CAPS_WORD_TOGGLE_KEY
+
+#define COMBO_ONLY_FROM_LAYER 0

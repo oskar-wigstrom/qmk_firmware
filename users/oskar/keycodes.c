@@ -43,21 +43,29 @@ bool caps_word_press_user(uint16_t keycode) {
 }
 // clang-format off
 const custom_shift_key_t custom_shift_keys[] = {
-    {SE_COMM, SE_SCLN},
-    {SE_DOT, SE_COLN},
-    {SE_QUOT, SE_ASTR},
+    {SE_DOT, SE_COMM},
     {SE_SLSH, SE_QUES},
-    {SE_PLUS, SE_EQL},
     {KC_BSPC, KC_DEL},
+    {SE_LPRN, SE_LBRC},
+    {SE_RPRN, SE_RBRC},
     // nums
     {SE_2, SE_AT},
     {SE_4, SE_DLR},
     {SE_7, SE_CIRC},
-    {SE_8, SE_DQUO},
-    {SE_9, SE_COLN},
 };
 // clang-format on
 uint8_t NUM_CUSTOM_SHIFT_KEYS = sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        // Index finger
+        case HR_T:
+        case HR_N:
+            return TAPPING_TERM;
+        default:
+            return TAPPING_TERM;
+    }
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     //    if (!process_smtd(keycode, record)) return false;

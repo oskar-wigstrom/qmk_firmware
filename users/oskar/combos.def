@@ -1,14 +1,23 @@
 // Left top row
+COMB(minus,             SE_MINS,        SE_F, SE_P)
+
 // Right top row
 COMB(eql,               SE_EQL,         SE_L, SE_U)
 
 // Left home row
 COMB(dquo,              SE_DQUO,        HR_R, HR_T)
-//COMB(del,               KC_DEL,         SE_T, SE_G)
+COMB(esc,               KC_ESC,        HR_S, HR_T)
 
 // Right home row
-COMB(coln_sym,          SE_COLN,       HR_N, HR_E)
+COMB(coln,              SE_COLN,       HR_N, HR_E)
 COMB(quot,              SE_QUOT,        HR_N, HR_I)
+
+// Both home row
+COMB(capsword,            CAPS_WORD,       HR_T, HR_N)
+
+// Left bottom row
+COMB(unds,              SE_UNDS,        SE_C, SE_D)
+COMB(perc,              SE_PERC,        SE_X, SE_C)
 
 // Right bottom row
 COMB(dlr,               SE_DLR,         SE_LPRN, SE_RPRN)

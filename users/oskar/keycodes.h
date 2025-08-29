@@ -7,7 +7,7 @@
 #include "quantum/action.h"
 #include "quantum/quantum_keycodes.h"
 
-enum layers { _BASE = 0, _SWE, _NAV, _SYM, _NUM, _SNUM };
+enum layers { _BASE = 0, _SWE, _NAV, _SYM, _NUM };
 
 enum custom_keycodes {
     // Direct dead keys ~`^
@@ -30,10 +30,10 @@ enum custom_keycodes {
 #define UNDO C(SE_Z)
 #define REDO C(S(SE_Z))
 
-#define L_TMB_L LT(_SNUM, KC_ESC)
 #define L_TMB_M LT(_NAV, KC_SPC)
 #define L_TMB_R LT(_NUM, KC_TAB)
 
+#define R_TMB_L KC_BSPC
 #define R_TMB_M LT(_SYM, KC_ENT)
 
 #define HR_A MT(MOD_LALT, SE_A)
